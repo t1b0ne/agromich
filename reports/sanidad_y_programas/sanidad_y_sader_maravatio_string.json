@@ -1,0 +1,77 @@
+{
+    "fecha_consulta": "2026-09-03 12:22:23",
+    "parametros_busqueda": {
+        "estado": "Michoacán de Ocampo",
+        "municipio": "maravatio",
+        "cultivo": "String"
+    },
+    "cesavemich_sanidad_vegetal": {
+        "total_alertas": 3,
+        "alertas_y_estatus": [
+            {
+                "cultivo": "Berries",
+                "plaga_enfermedad": "Trips y Araña Roja (Tetranychus urticae)",
+                "estatus": "Alerta Activa en temporada seca",
+                "nivel_alerta": "Alta",
+                "recomendacion_fitosanitaria": "Uso de ácaros depredadores (Phytoseiulus), regulación de microclima y humedad relativa.",
+                "zonas_criticas": [
+                    "Zamora",
+                    "Jacona",
+                    "Tangancícuaro",
+                    "Maravatío"
+                ]
+            },
+            {
+                "cultivo": "Berries",
+                "plaga_enfermedad": "Mosca de alas manchadas (Drosophila suzukii)",
+                "estatus": "Vigilancia Epidemiológica Permanente",
+                "nivel_alerta": "Alta",
+                "recomendacion_fitosanitaria": "Colocación de trampas de monitoreo con vinagre de manzana, recolección oportuna.",
+                "zonas_criticas": [
+                    "Maravatío",
+                    "Zitácuaro",
+                    "Zamora"
+                ]
+            },
+            {
+                "cultivo": "Maíz",
+                "plaga_enfermedad": "Gusano Cogollero (Spodoptera frugiperda)",
+                "estatus": "Frecuente / Estacional",
+                "nivel_alerta": "Media",
+                "recomendacion_fitosanitaria": "Liberación de Trichogramma, aplicación de Bacillus thuringiensis en primeras etapas.",
+                "zonas_criticas": [
+                    "Maravatío",
+                    "Penjamillo",
+                    "Ecuandureo",
+                    "Venustiano Carranza"
+                ]
+            }
+        ]
+    },
+    "sader_michoacan_programas": {
+        "total_programas": 3,
+        "programas_activos": [
+            {
+                "programa": "AgroSano Michoacán",
+                "descripcion": "Fomento a la transición agroecológica, bioinsumos y asistencia técnica gratuita en territorio.",
+                "beneficiarios": "Pequeños y medianos productores de granos, hortalizas y frutales.",
+                "requisitos_clave": "CURP, Identificación Oficial, Comprobante de legal posesión del predio.",
+                "cobertura": "Estatal (113 municipios)"
+            },
+            {
+                "programa": "Programa de Maíz e Insumos Agrícolas",
+                "descripcion": "Subsidiario para la adquisición de semilla certificada y fertilizantes / acondicionadores de suelo.",
+                "beneficiarios": "Productores de temporal y riego de maíz y trigo.",
+                "requisitos_clave": "Estar dentro del Padrón Único de Productores de SADER y georreferenciación de parcela.",
+                "cobertura": "Bajío Michoacano, Valle de Maravatío, Meseta Purépecha"
+            },
+            {
+                "programa": "Certificación y Fitosanidad Agropecuaria",
+                "descripcion": "Apoyos directos para la integración de campañas fitosanitarias de CESAVEMICH e inocuidad.",
+                "beneficiarios": "Unidades de Producción de Aguacate, Berries y Cítricos.",
+                "requisitos_clave": "Registro de Huerto en SADER-CESAVEMICH y bitácora de manejo de plaguicidas.",
+                "cobertura": "Zonas de Exportación Fitosanitaria"
+            }
+        ]
+    }
+}

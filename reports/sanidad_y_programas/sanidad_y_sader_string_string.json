@@ -1,0 +1,38 @@
+{
+    "fecha_consulta": "2026-09-02 20:13:52",
+    "parametros_busqueda": {
+        "estado": "Michoacán de Ocampo",
+        "municipio": "string",
+        "cultivo": "String"
+    },
+    "cesavemich_sanidad_vegetal": {
+        "total_alertas": 0,
+        "alertas_y_estatus": []
+    },
+    "sader_michoacan_programas": {
+        "total_programas": 3,
+        "programas_activos": [
+            {
+                "programa": "AgroSano Michoacán",
+                "descripcion": "Fomento a la transición agroecológica, bioinsumos y asistencia técnica gratuita en territorio.",
+                "beneficiarios": "Pequeños y medianos productores de granos, hortalizas y frutales.",
+                "requisitos_clave": "CURP, Identificación Oficial, Comprobante de legal posesión del predio.",
+                "cobertura": "Estatal (113 municipios)"
+            },
+            {
+                "programa": "Programa de Maíz e Insumos Agrícolas",
+                "descripcion": "Subsidiario para la adquisición de semilla certificada y fertilizantes / acondicionadores de suelo.",
+                "beneficiarios": "Productores de temporal y riego de maíz y trigo.",
+                "requisitos_clave": "Estar dentro del Padrón Único de Productores de SADER y georreferenciación de parcela.",
+                "cobertura": "Bajío Michoacano, Valle de Maravatío, Meseta Purépecha"
+            },
+            {
+                "programa": "Certificación y Fitosanidad Agropecuaria",
+                "descripcion": "Apoyos directos para la integración de campañas fitosanitarias de CESAVEMICH e inocuidad.",
+                "beneficiarios": "Unidades de Producción de Aguacate, Berries y Cítricos.",
+                "requisitos_clave": "Registro de Huerto en SADER-CESAVEMICH y bitácora de manejo de plaguicidas.",
+                "cobertura": "Zonas de Exportación Fitosanitaria"
+            }
+        ]
+    }
+}

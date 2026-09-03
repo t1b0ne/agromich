@@ -1,0 +1,11 @@
+# Entorno virtual de Python
+venv/
+env/
+.venv/
+
+# Archivos de caché y compilación
+__pycache__/
+*.pyc
+
+# Respaldos locales opcionales (si no quieres subir reports de prueba)
+# reports/procesados/*.json

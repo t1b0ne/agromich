@@ -1,0 +1,707 @@
+{
+    "tipo_reporte": "General Estatal",
+    "estado": "Michoacán de Ocampo",
+    "periodo": {
+        "inicio": "2025-01-01",
+        "fin": "2025-12-31"
+    },
+    "total_municipios": 113,
+    "promedios_estatales": {
+        "ndvi_promedio": 0.4421,
+        "ndwi_promedio": 0.0085
+    },
+    "top_3_municipios_verdes": [
+        {
+            "municipio": "Tingambato",
+            "ndvi": 0.6806
+        },
+        {
+            "municipio": "Nuevo Parangaricutiro",
+            "ndvi": 0.6559
+        },
+        {
+            "municipio": "Angangueo",
+            "ndvi": 0.6336
+        }
+    ],
+    "desglose_todos_municipios": [
+        {
+            "municipio": "Tingambato",
+            "ndvi": 0.6806,
+            "estres_hidrico_ndwi": 0.1846,
+            "nitrogeno_ndre": 0.4694
+        },
+        {
+            "municipio": "Nuevo Parangaricutiro",
+            "ndvi": 0.6559,
+            "estres_hidrico_ndwi": 0.1902,
+            "nitrogeno_ndre": 0.4492
+        },
+        {
+            "municipio": "Angangueo",
+            "ndvi": 0.6336,
+            "estres_hidrico_ndwi": 0.1848,
+            "nitrogeno_ndre": 0.4363
+        },
+        {
+            "municipio": "Ziracuaretiro",
+            "ndvi": 0.6334,
+            "estres_hidrico_ndwi": 0.142,
+            "nitrogeno_ndre": 0.4429
+        },
+        {
+            "municipio": "Aquila",
+            "ndvi": 0.6331,
+            "estres_hidrico_ndwi": 0.0686,
+            "nitrogeno_ndre": 0.4405
+        },
+        {
+            "municipio": "Coalcoman De Vasquez P.",
+            "ndvi": 0.6317,
+            "estres_hidrico_ndwi": 0.0796,
+            "nitrogeno_ndre": 0.4317
+        },
+        {
+            "municipio": "Aporo",
+            "ndvi": 0.6273,
+            "estres_hidrico_ndwi": 0.1302,
+            "nitrogeno_ndre": 0.4317
+        },
+        {
+            "municipio": "Lazaro Cardenas",
+            "ndvi": 0.6228,
+            "estres_hidrico_ndwi": 0.0862,
+            "nitrogeno_ndre": 0.4333
+        },
+        {
+            "municipio": "Coahuayana",
+            "ndvi": 0.6225,
+            "estres_hidrico_ndwi": 0.102,
+            "nitrogeno_ndre": 0.4433
+        },
+        {
+            "municipio": "Zitacuaro",
+            "ndvi": 0.6145,
+            "estres_hidrico_ndwi": 0.1575,
+            "nitrogeno_ndre": 0.4233
+        },
+        {
+            "municipio": "Hidalgo",
+            "ndvi": 0.6109,
+            "estres_hidrico_ndwi": 0.1467,
+            "nitrogeno_ndre": 0.4265
+        },
+        {
+            "municipio": "Ocampo",
+            "ndvi": 0.6043,
+            "estres_hidrico_ndwi": 0.1454,
+            "nitrogeno_ndre": 0.4135
+        },
+        {
+            "municipio": "Chinicuila",
+            "ndvi": 0.6,
+            "estres_hidrico_ndwi": 0.0186,
+            "nitrogeno_ndre": 0.4165
+        },
+        {
+            "municipio": "Tancitaro",
+            "ndvi": 0.5932,
+            "estres_hidrico_ndwi": 0.1662,
+            "nitrogeno_ndre": 0.4152
+        },
+        {
+            "municipio": "Salvador Escalante",
+            "ndvi": 0.5909,
+            "estres_hidrico_ndwi": 0.1329,
+            "nitrogeno_ndre": 0.4115
+        },
+        {
+            "municipio": "Ario",
+            "ndvi": 0.5868,
+            "estres_hidrico_ndwi": 0.1278,
+            "nitrogeno_ndre": 0.4126
+        },
+        {
+            "municipio": "Patzcuaro",
+            "ndvi": 0.5844,
+            "estres_hidrico_ndwi": 0.1111,
+            "nitrogeno_ndre": 0.4044
+        },
+        {
+            "municipio": "Cheran",
+            "ndvi": 0.5752,
+            "estres_hidrico_ndwi": 0.1056,
+            "nitrogeno_ndre": 0.3939
+        },
+        {
+            "municipio": "Uruapan",
+            "ndvi": 0.574,
+            "estres_hidrico_ndwi": 0.093,
+            "nitrogeno_ndre": 0.3912
+        },
+        {
+            "municipio": "Madero",
+            "ndvi": 0.5738,
+            "estres_hidrico_ndwi": 0.0661,
+            "nitrogeno_ndre": 0.4019
+        },
+        {
+            "municipio": "Tacambaro",
+            "ndvi": 0.5716,
+            "estres_hidrico_ndwi": 0.1111,
+            "nitrogeno_ndre": 0.4028
+        },
+        {
+            "municipio": "Acuitzio",
+            "ndvi": 0.5708,
+            "estres_hidrico_ndwi": 0.0913,
+            "nitrogeno_ndre": 0.4007
+        },
+        {
+            "municipio": "Tuxpan",
+            "ndvi": 0.5668,
+            "estres_hidrico_ndwi": 0.0693,
+            "nitrogeno_ndre": 0.3927
+        },
+        {
+            "municipio": "Juarez",
+            "ndvi": 0.5645,
+            "estres_hidrico_ndwi": 0.0731,
+            "nitrogeno_ndre": 0.3921
+        },
+        {
+            "municipio": "Los Reyes",
+            "ndvi": 0.5603,
+            "estres_hidrico_ndwi": 0.0987,
+            "nitrogeno_ndre": 0.3854
+        },
+        {
+            "municipio": "Tinguindin",
+            "ndvi": 0.554,
+            "estres_hidrico_ndwi": 0.0707,
+            "nitrogeno_ndre": 0.3836
+        },
+        {
+            "municipio": "Erongaricuaro",
+            "ndvi": 0.5539,
+            "estres_hidrico_ndwi": 0.0892,
+            "nitrogeno_ndre": 0.3847
+        },
+        {
+            "municipio": "Nuevo Urecho",
+            "ndvi": 0.5465,
+            "estres_hidrico_ndwi": 0.0579,
+            "nitrogeno_ndre": 0.3842
+        },
+        {
+            "municipio": "Tumbiscatio",
+            "ndvi": 0.5463,
+            "estres_hidrico_ndwi": 0.003,
+            "nitrogeno_ndre": 0.3713
+        },
+        {
+            "municipio": "Querendaro",
+            "ndvi": 0.545,
+            "estres_hidrico_ndwi": 0.1109,
+            "nitrogeno_ndre": 0.3842
+        },
+        {
+            "municipio": "Nahuatzen",
+            "ndvi": 0.5447,
+            "estres_hidrico_ndwi": 0.1129,
+            "nitrogeno_ndre": 0.3751
+        },
+        {
+            "municipio": "Tzitzio",
+            "ndvi": 0.5384,
+            "estres_hidrico_ndwi": 0.0081,
+            "nitrogeno_ndre": 0.3789
+        },
+        {
+            "municipio": "Tarentan",
+            "ndvi": 0.519,
+            "estres_hidrico_ndwi": 0.0293,
+            "nitrogeno_ndre": 0.3634
+        },
+        {
+            "municipio": "Arteaga",
+            "ndvi": 0.5151,
+            "estres_hidrico_ndwi": -0.0343,
+            "nitrogeno_ndre": 0.3555
+        },
+        {
+            "municipio": "Chilchota",
+            "ndvi": 0.512,
+            "estres_hidrico_ndwi": 0.0447,
+            "nitrogeno_ndre": 0.3492
+        },
+        {
+            "municipio": "Charapan",
+            "ndvi": 0.5118,
+            "estres_hidrico_ndwi": 0.0547,
+            "nitrogeno_ndre": 0.3486
+        },
+        {
+            "municipio": "Senguio",
+            "ndvi": 0.51,
+            "estres_hidrico_ndwi": 0.0633,
+            "nitrogeno_ndre": 0.3539
+        },
+        {
+            "municipio": "Jungapeo",
+            "ndvi": 0.5059,
+            "estres_hidrico_ndwi": 0.0128,
+            "nitrogeno_ndre": 0.352
+        },
+        {
+            "municipio": "Periban",
+            "ndvi": 0.5058,
+            "estres_hidrico_ndwi": 0.0565,
+            "nitrogeno_ndre": 0.357
+        },
+        {
+            "municipio": "Aguililla",
+            "ndvi": 0.4938,
+            "estres_hidrico_ndwi": -0.0246,
+            "nitrogeno_ndre": 0.34
+        },
+        {
+            "municipio": "Susupuato",
+            "ndvi": 0.4879,
+            "estres_hidrico_ndwi": -0.0146,
+            "nitrogeno_ndre": 0.3421
+        },
+        {
+            "municipio": "Charo",
+            "ndvi": 0.4856,
+            "estres_hidrico_ndwi": -0.0093,
+            "nitrogeno_ndre": 0.3458
+        },
+        {
+            "municipio": "Paracho",
+            "ndvi": 0.4819,
+            "estres_hidrico_ndwi": 0.037,
+            "nitrogeno_ndre": 0.3256
+        },
+        {
+            "municipio": "Tlalpujahua",
+            "ndvi": 0.4812,
+            "estres_hidrico_ndwi": 0.0543,
+            "nitrogeno_ndre": 0.3373
+        },
+        {
+            "municipio": "Gabriel Zamora",
+            "ndvi": 0.4749,
+            "estres_hidrico_ndwi": -0.0025,
+            "nitrogeno_ndre": 0.3366
+        },
+        {
+            "municipio": "Mugica",
+            "ndvi": 0.4685,
+            "estres_hidrico_ndwi": 0.0374,
+            "nitrogeno_ndre": 0.3267
+        },
+        {
+            "municipio": "Zacapu",
+            "ndvi": 0.4644,
+            "estres_hidrico_ndwi": 0.0154,
+            "nitrogeno_ndre": 0.3288
+        },
+        {
+            "municipio": "Indaparapeo",
+            "ndvi": 0.4589,
+            "estres_hidrico_ndwi": 0.009,
+            "nitrogeno_ndre": 0.331
+        },
+        {
+            "municipio": "Cotija",
+            "ndvi": 0.4589,
+            "estres_hidrico_ndwi": 0.0011,
+            "nitrogeno_ndre": 0.3154
+        },
+        {
+            "municipio": "Tocumbo",
+            "ndvi": 0.4569,
+            "estres_hidrico_ndwi": -0.0324,
+            "nitrogeno_ndre": 0.3154
+        },
+        {
+            "municipio": "Apatzingan",
+            "ndvi": 0.453,
+            "estres_hidrico_ndwi": -0.0326,
+            "nitrogeno_ndre": 0.3179
+        },
+        {
+            "municipio": "Tangamandapio",
+            "ndvi": 0.4512,
+            "estres_hidrico_ndwi": -0.0141,
+            "nitrogeno_ndre": 0.317
+        },
+        {
+            "municipio": "Zinapecuaro",
+            "ndvi": 0.4401,
+            "estres_hidrico_ndwi": 0.0568,
+            "nitrogeno_ndre": 0.2938
+        },
+        {
+            "municipio": "Quiroga",
+            "ndvi": 0.4359,
+            "estres_hidrico_ndwi": 0.129,
+            "nitrogeno_ndre": 0.2767
+        },
+        {
+            "municipio": "Tangancicuaro",
+            "ndvi": 0.4343,
+            "estres_hidrico_ndwi": 0.0305,
+            "nitrogeno_ndre": 0.3082
+        },
+        {
+            "municipio": "Paracuaro",
+            "ndvi": 0.4319,
+            "estres_hidrico_ndwi": -0.0307,
+            "nitrogeno_ndre": 0.3032
+        },
+        {
+            "municipio": "Chucandiro",
+            "ndvi": 0.4317,
+            "estres_hidrico_ndwi": -0.0515,
+            "nitrogeno_ndre": 0.3096
+        },
+        {
+            "municipio": "Morelia",
+            "ndvi": 0.421,
+            "estres_hidrico_ndwi": -0.0301,
+            "nitrogeno_ndre": 0.3002
+        },
+        {
+            "municipio": "Tepalcatepec",
+            "ndvi": 0.4164,
+            "estres_hidrico_ndwi": -0.0567,
+            "nitrogeno_ndre": 0.2944
+        },
+        {
+            "municipio": "Purepero",
+            "ndvi": 0.4067,
+            "estres_hidrico_ndwi": 0.0095,
+            "nitrogeno_ndre": 0.2898
+        },
+        {
+            "municipio": "Coeneo",
+            "ndvi": 0.4062,
+            "estres_hidrico_ndwi": -0.0713,
+            "nitrogeno_ndre": 0.2913
+        },
+        {
+            "municipio": "Irimbo",
+            "ndvi": 0.4029,
+            "estres_hidrico_ndwi": -0.0711,
+            "nitrogeno_ndre": 0.2886
+        },
+        {
+            "municipio": "Lagunillas",
+            "ndvi": 0.4014,
+            "estres_hidrico_ndwi": -0.0657,
+            "nitrogeno_ndre": 0.2913
+        },
+        {
+            "municipio": "Nocupetaro",
+            "ndvi": 0.3985,
+            "estres_hidrico_ndwi": -0.1097,
+            "nitrogeno_ndre": 0.2923
+        },
+        {
+            "municipio": "Tuzantla",
+            "ndvi": 0.3983,
+            "estres_hidrico_ndwi": -0.1209,
+            "nitrogeno_ndre": 0.2862
+        },
+        {
+            "municipio": "Alvaro Obregon",
+            "ndvi": 0.3945,
+            "estres_hidrico_ndwi": 0.107,
+            "nitrogeno_ndre": 0.2453
+        },
+        {
+            "municipio": "Huiramba",
+            "ndvi": 0.3926,
+            "estres_hidrico_ndwi": -0.0495,
+            "nitrogeno_ndre": 0.2833
+        },
+        {
+            "municipio": "Turicato",
+            "ndvi": 0.3921,
+            "estres_hidrico_ndwi": -0.1104,
+            "nitrogeno_ndre": 0.2859
+        },
+        {
+            "municipio": "Jiquilpan",
+            "ndvi": 0.3876,
+            "estres_hidrico_ndwi": -0.0747,
+            "nitrogeno_ndre": 0.277
+        },
+        {
+            "municipio": "Tlazazalca",
+            "ndvi": 0.3821,
+            "estres_hidrico_ndwi": -0.0902,
+            "nitrogeno_ndre": 0.2725
+        },
+        {
+            "municipio": "Panindicuaro",
+            "ndvi": 0.381,
+            "estres_hidrico_ndwi": -0.0876,
+            "nitrogeno_ndre": 0.2759
+        },
+        {
+            "municipio": "Nicolas Romero",
+            "ndvi": 0.3789,
+            "estres_hidrico_ndwi": -0.1325,
+            "nitrogeno_ndre": 0.2791
+        },
+        {
+            "municipio": "Santa Ana Maya",
+            "ndvi": 0.3752,
+            "estres_hidrico_ndwi": 0.0586,
+            "nitrogeno_ndre": 0.2513
+        },
+        {
+            "municipio": "Yurecuaro",
+            "ndvi": 0.3726,
+            "estres_hidrico_ndwi": -0.0239,
+            "nitrogeno_ndre": 0.2695
+        },
+        {
+            "municipio": "Jacona",
+            "ndvi": 0.371,
+            "estres_hidrico_ndwi": -0.0456,
+            "nitrogeno_ndre": 0.2665
+        },
+        {
+            "municipio": "Vista Hermosa",
+            "ndvi": 0.3702,
+            "estres_hidrico_ndwi": 0.014,
+            "nitrogeno_ndre": 0.2699
+        },
+        {
+            "municipio": "Pajacuaran",
+            "ndvi": 0.3672,
+            "estres_hidrico_ndwi": -0.0528,
+            "nitrogeno_ndre": 0.2662
+        },
+        {
+            "municipio": "Morelos",
+            "ndvi": 0.3666,
+            "estres_hidrico_ndwi": -0.0478,
+            "nitrogeno_ndre": 0.2669
+        },
+        {
+            "municipio": "Marcos Castellanos",
+            "ndvi": 0.3653,
+            "estres_hidrico_ndwi": -0.1136,
+            "nitrogeno_ndre": 0.2676
+        },
+        {
+            "municipio": "Buenavista",
+            "ndvi": 0.363,
+            "estres_hidrico_ndwi": -0.0565,
+            "nitrogeno_ndre": 0.2613
+        },
+        {
+            "municipio": "Ecuandureo",
+            "ndvi": 0.362,
+            "estres_hidrico_ndwi": -0.0759,
+            "nitrogeno_ndre": 0.2631
+        },
+        {
+            "municipio": "Caracuaro",
+            "ndvi": 0.3599,
+            "estres_hidrico_ndwi": -0.1539,
+            "nitrogeno_ndre": 0.2681
+        },
+        {
+            "municipio": "Churintzio",
+            "ndvi": 0.3599,
+            "estres_hidrico_ndwi": -0.081,
+            "nitrogeno_ndre": 0.2602
+        },
+        {
+            "municipio": "Tanhuato",
+            "ndvi": 0.3584,
+            "estres_hidrico_ndwi": -0.0725,
+            "nitrogeno_ndre": 0.2587
+        },
+        {
+            "municipio": "Ixtlan",
+            "ndvi": 0.3549,
+            "estres_hidrico_ndwi": -0.0349,
+            "nitrogeno_ndre": 0.2534
+        },
+        {
+            "municipio": "Huaniqueo",
+            "ndvi": 0.3535,
+            "estres_hidrico_ndwi": -0.0776,
+            "nitrogeno_ndre": 0.2537
+        },
+        {
+            "municipio": "Maravatio",
+            "ndvi": 0.3518,
+            "estres_hidrico_ndwi": -0.0586,
+            "nitrogeno_ndre": 0.2549
+        },
+        {
+            "municipio": "Sahuayo",
+            "ndvi": 0.3419,
+            "estres_hidrico_ndwi": -0.1207,
+            "nitrogeno_ndre": 0.2483
+        },
+        {
+            "municipio": "Zinaparo",
+            "ndvi": 0.3386,
+            "estres_hidrico_ndwi": -0.0879,
+            "nitrogeno_ndre": 0.2492
+        },
+        {
+            "municipio": "Brisenas De Matamoros",
+            "ndvi": 0.336,
+            "estres_hidrico_ndwi": 0.0095,
+            "nitrogeno_ndre": 0.2335
+        },
+        {
+            "municipio": "La Huacana",
+            "ndvi": 0.3359,
+            "estres_hidrico_ndwi": -0.0989,
+            "nitrogeno_ndre": 0.2374
+        },
+        {
+            "municipio": "La Piedad",
+            "ndvi": 0.3317,
+            "estres_hidrico_ndwi": -0.0629,
+            "nitrogeno_ndre": 0.2403
+        },
+        {
+            "municipio": "Villamar",
+            "ndvi": 0.3317,
+            "estres_hidrico_ndwi": -0.1148,
+            "nitrogeno_ndre": 0.2387
+        },
+        {
+            "municipio": "San Lucas",
+            "ndvi": 0.3315,
+            "estres_hidrico_ndwi": -0.1512,
+            "nitrogeno_ndre": 0.2457
+        },
+        {
+            "municipio": "Huandacareo",
+            "ndvi": 0.3295,
+            "estres_hidrico_ndwi": 0.187,
+            "nitrogeno_ndre": 0.2187
+        },
+        {
+            "municipio": "Puruandiro",
+            "ndvi": 0.3218,
+            "estres_hidrico_ndwi": -0.1007,
+            "nitrogeno_ndre": 0.234
+        },
+        {
+            "municipio": "Jimenez",
+            "ndvi": 0.3144,
+            "estres_hidrico_ndwi": -0.0687,
+            "nitrogeno_ndre": 0.2232
+        },
+        {
+            "municipio": "Zamora",
+            "ndvi": 0.3139,
+            "estres_hidrico_ndwi": -0.04,
+            "nitrogeno_ndre": 0.2289
+        },
+        {
+            "municipio": "Penjamillo",
+            "ndvi": 0.312,
+            "estres_hidrico_ndwi": -0.1155,
+            "nitrogeno_ndre": 0.2292
+        },
+        {
+            "municipio": "Copandaro De Galeana",
+            "ndvi": 0.3119,
+            "estres_hidrico_ndwi": 0.0856,
+            "nitrogeno_ndre": 0.215
+        },
+        {
+            "municipio": "Venustiano Carranza",
+            "ndvi": 0.3108,
+            "estres_hidrico_ndwi": 0.0218,
+            "nitrogeno_ndre": 0.2016
+        },
+        {
+            "municipio": "Tarimbaro",
+            "ndvi": 0.3092,
+            "estres_hidrico_ndwi": -0.0962,
+            "nitrogeno_ndre": 0.2256
+        },
+        {
+            "municipio": "Chavinda",
+            "ndvi": 0.3085,
+            "estres_hidrico_ndwi": -0.0919,
+            "nitrogeno_ndre": 0.2253
+        },
+        {
+            "municipio": "Huetamo",
+            "ndvi": 0.3043,
+            "estres_hidrico_ndwi": -0.1756,
+            "nitrogeno_ndre": 0.2264
+        },
+        {
+            "municipio": "Jose Sixto Verduzco",
+            "ndvi": 0.3038,
+            "estres_hidrico_ndwi": -0.0477,
+            "nitrogeno_ndre": 0.22
+        },
+        {
+            "municipio": "Numaran",
+            "ndvi": 0.2824,
+            "estres_hidrico_ndwi": -0.0455,
+            "nitrogeno_ndre": 0.2072
+        },
+        {
+            "municipio": "Churumuco",
+            "ndvi": 0.2705,
+            "estres_hidrico_ndwi": -0.1165,
+            "nitrogeno_ndre": 0.1874
+        },
+        {
+            "municipio": "Contepec",
+            "ndvi": 0.2694,
+            "estres_hidrico_ndwi": -0.0742,
+            "nitrogeno_ndre": 0.1852
+        },
+        {
+            "municipio": "Angamacutiro",
+            "ndvi": 0.2534,
+            "estres_hidrico_ndwi": -0.0653,
+            "nitrogeno_ndre": 0.1758
+        },
+        {
+            "municipio": "Tzintzuntzan",
+            "ndvi": 0.2479,
+            "estres_hidrico_ndwi": 0.1227,
+            "nitrogeno_ndre": 0.1274
+        },
+        {
+            "municipio": "Epitacio Huerta",
+            "ndvi": 0.2469,
+            "estres_hidrico_ndwi": -0.1034,
+            "nitrogeno_ndre": 0.1736
+        },
+        {
+            "municipio": "Cojumatlan De Regules",
+            "ndvi": 0.2035,
+            "estres_hidrico_ndwi": 0.098,
+            "nitrogeno_ndre": 0.0898
+        },
+        {
+            "municipio": "Cuitzeo",
+            "ndvi": 0.1979,
+            "estres_hidrico_ndwi": 0.2689,
+            "nitrogeno_ndre": 0.0766
+        }
+    ]
+}

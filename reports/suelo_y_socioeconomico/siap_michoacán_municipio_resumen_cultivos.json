@@ -1,0 +1,1052 @@
+{
+  "metadata": {
+    "fuente": "SIAP - Avance Agrícola",
+    "estado_consultado": "Michoacán",
+    "tipo_consulta": "municipio",
+    "ciclo": "Ciclicos - Perennes",
+    "modalidad": "Riego + Temporal",
+    "cultivo": "Resumen cultivos",
+    "metodo_extraccion": "HTML DOM Scraper Directo (Headless)",
+    "fecha_extraccion": "2026-09-03 12:21:04",
+    "total_registros": 116
+  },
+  "datos": [
+    {
+      "columna_0": "Entidad",
+      "columna_1": "Distrito",
+      "columna_2": "Municipio",
+      "columna_3": "Superficie(ha)"
+    },
+    {
+      "columna_0": "Sembrada",
+      "columna_1": "Cosechada",
+      "columna_2": "Siniestrada"
+    },
+    {
+      "columna_0": 1,
+      "columna_1": "Michoacán",
+      "columna_2": "Coahuayana",
+      "columna_3": "Aquila",
+      "columna_4": 1882.6,
+      "columna_5": 1340.1,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 2,
+      "columna_1": "Michoacán",
+      "columna_2": "Coahuayana",
+      "columna_3": "Coahuayana",
+      "columna_4": 6489.32,
+      "columna_5": 6035.73,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 3,
+      "columna_1": "Michoacán",
+      "columna_2": "Coahuayana",
+      "columna_3": "Chinicuila",
+      "columna_4": 3068.22,
+      "columna_5": 409.22,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 4,
+      "columna_1": "Michoacán",
+      "columna_2": "Aguililla",
+      "columna_3": "Aguililla",
+      "columna_4": 6802.0,
+      "columna_5": 2360.43,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 5,
+      "columna_1": "Michoacán",
+      "columna_2": "Aguililla",
+      "columna_3": "Coalcomán de Vázquez Pallares",
+      "columna_4": 6665.5,
+      "columna_5": 723.67,
+      "columna_6": 155.0
+    },
+    {
+      "columna_0": 6,
+      "columna_1": "Michoacán",
+      "columna_2": "Lázaro Cárdenas",
+      "columna_3": "Arteaga",
+      "columna_4": 5540.0,
+      "columna_5": 10.0,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 7,
+      "columna_1": "Michoacán",
+      "columna_2": "Lázaro Cárdenas",
+      "columna_3": "Lázaro Cárdenas",
+      "columna_4": 5733.93,
+      "columna_5": 4804.87,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 8,
+      "columna_1": "Michoacán",
+      "columna_2": "Huacana",
+      "columna_3": "Churumuco",
+      "columna_4": 3019.83,
+      "columna_5": 152.5,
+      "columna_6": 0.5
+    },
+    {
+      "columna_0": 9,
+      "columna_1": "Michoacán",
+      "columna_2": "Huacana",
+      "columna_3": "La Huacana",
+      "columna_4": 8336.5,
+      "columna_5": 4669.0,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 10,
+      "columna_1": "Michoacán",
+      "columna_2": "Huacana",
+      "columna_3": "Tumbiscatío",
+      "columna_4": 399.0,
+      "columna_5": 88.44,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 11,
+      "columna_1": "Michoacán",
+      "columna_2": "Apatzingán",
+      "columna_3": "Apatzingán",
+      "columna_4": 17200.19,
+      "columna_5": 12685.06,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 12,
+      "columna_1": "Michoacán",
+      "columna_2": "Apatzingán",
+      "columna_3": "Buenavista",
+      "columna_4": 25667.97,
+      "columna_5": 23060.99,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 13,
+      "columna_1": "Michoacán",
+      "columna_2": "Apatzingán",
+      "columna_3": "Gabriel Zamora",
+      "columna_4": 8412.74,
+      "columna_5": 6484.04,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 14,
+      "columna_1": "Michoacán",
+      "columna_2": "Apatzingán",
+      "columna_3": "Múgica",
+      "columna_4": 18726.0,
+      "columna_5": 16510.33,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 15,
+      "columna_1": "Michoacán",
+      "columna_2": "Apatzingán",
+      "columna_3": "Nuevo Urecho",
+      "columna_4": 5748.89,
+      "columna_5": 5193.89,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 16,
+      "columna_1": "Michoacán",
+      "columna_2": "Apatzingán",
+      "columna_3": "Parácuaro",
+      "columna_4": 21869.0,
+      "columna_5": 18108.59,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 17,
+      "columna_1": "Michoacán",
+      "columna_2": "Apatzingán",
+      "columna_3": "Tepalcatepec",
+      "columna_4": 17732.0,
+      "columna_5": 11800.99,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 18,
+      "columna_1": "Michoacán",
+      "columna_2": "Uruapan",
+      "columna_3": "Charapan",
+      "columna_4": 4179.0,
+      "columna_5": 426.0,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 19,
+      "columna_1": "Michoacán",
+      "columna_2": "Uruapan",
+      "columna_3": "Cherán",
+      "columna_4": 2846.0,
+      "columna_5": 4.0,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 20,
+      "columna_1": "Michoacán",
+      "columna_2": "Uruapan",
+      "columna_3": "Nahuatzen",
+      "columna_4": 2268.5,
+      "columna_5": 8.5,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 21,
+      "columna_1": "Michoacán",
+      "columna_2": "Uruapan",
+      "columna_3": "Nuevo Parangaricutiro",
+      "columna_4": 9972.0,
+      "columna_5": 9069.61,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 22,
+      "columna_1": "Michoacán",
+      "columna_2": "Uruapan",
+      "columna_3": "Paracho",
+      "columna_4": 4670.0,
+      "columna_5": 4.0,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 23,
+      "columna_1": "Michoacán",
+      "columna_2": "Uruapan",
+      "columna_3": "Tancítaro",
+      "columna_4": 30182.56,
+      "columna_5": 25442.17,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 24,
+      "columna_1": "Michoacán",
+      "columna_2": "Uruapan",
+      "columna_3": "Taretan",
+      "columna_4": 7961.76,
+      "columna_5": 6470.87,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 25,
+      "columna_1": "Michoacán",
+      "columna_2": "Uruapan",
+      "columna_3": "Tingambato",
+      "columna_4": 5582.0,
+      "columna_5": 4294.39,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 26,
+      "columna_1": "Michoacán",
+      "columna_2": "Uruapan",
+      "columna_3": "Uruapan",
+      "columna_4": 23622.0,
+      "columna_5": 18969.14,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 27,
+      "columna_1": "Michoacán",
+      "columna_2": "Uruapan",
+      "columna_3": "Ziracuaretiro",
+      "columna_4": 6345.13,
+      "columna_5": 5836.23,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 28,
+      "columna_1": "Michoacán",
+      "columna_2": "Zamora",
+      "columna_3": "Cotija",
+      "columna_4": 8973.42,
+      "columna_5": 4549.53,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 29,
+      "columna_1": "Michoacán",
+      "columna_2": "Zamora",
+      "columna_3": "Chavinda",
+      "columna_4": 3439.26,
+      "columna_5": 438.26,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 30,
+      "columna_1": "Michoacán",
+      "columna_2": "Zamora",
+      "columna_3": "Chilchota",
+      "columna_4": 4603.7,
+      "columna_5": 1921.85,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 31,
+      "columna_1": "Michoacán",
+      "columna_2": "Zamora",
+      "columna_3": "Ecuandureo",
+      "columna_4": 3597.75,
+      "columna_5": 497.75,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 32,
+      "columna_1": "Michoacán",
+      "columna_2": "Zamora",
+      "columna_3": "Ixtlán",
+      "columna_4": 5161.24,
+      "columna_5": 1701.24,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 33,
+      "columna_1": "Michoacán",
+      "columna_2": "Zamora",
+      "columna_3": "Jacona",
+      "columna_4": 1637.0,
+      "columna_5": 983.0,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 34,
+      "columna_1": "Michoacán",
+      "columna_2": "Zamora",
+      "columna_3": "Peribán",
+      "columna_4": 15213.76,
+      "columna_5": 14517.94,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 35,
+      "columna_1": "Michoacán",
+      "columna_2": "Zamora",
+      "columna_3": "Purépero",
+      "columna_4": 2421.0,
+      "columna_5": 938.05,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 36,
+      "columna_1": "Michoacán",
+      "columna_2": "Zamora",
+      "columna_3": "Los Reyes",
+      "columna_4": 16105.02,
+      "columna_5": 11350.91,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 37,
+      "columna_1": "Michoacán",
+      "columna_2": "Zamora",
+      "columna_3": "Tangamandapio",
+      "columna_4": 8620.0,
+      "columna_5": 3637.72,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 38,
+      "columna_1": "Michoacán",
+      "columna_2": "Zamora",
+      "columna_3": "Tangancícuaro",
+      "columna_4": 9661.54,
+      "columna_5": 4440.16,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 39,
+      "columna_1": "Michoacán",
+      "columna_2": "Zamora",
+      "columna_3": "Tingüindín",
+      "columna_4": 7087.83,
+      "columna_5": 5929.64,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 40,
+      "columna_1": "Michoacán",
+      "columna_2": "Zamora",
+      "columna_3": "Tlazazalca",
+      "columna_4": 1969.0,
+      "columna_5": 387.15,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 41,
+      "columna_1": "Michoacán",
+      "columna_2": "Zamora",
+      "columna_3": "Tocumbo",
+      "columna_4": 5012.79,
+      "columna_5": 3556.36,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 42,
+      "columna_1": "Michoacán",
+      "columna_2": "Zamora",
+      "columna_3": "Zamora",
+      "columna_4": 9831.33,
+      "columna_5": 4220.89,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 43,
+      "columna_1": "Michoacán",
+      "columna_2": "Sahuayo",
+      "columna_3": "Briseñas",
+      "columna_4": 6402.07,
+      "columna_5": 1740.11,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 44,
+      "columna_1": "Michoacán",
+      "columna_2": "Sahuayo",
+      "columna_3": "Jiquilpan",
+      "columna_4": 9394.5,
+      "columna_5": 1980.03,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 45,
+      "columna_1": "Michoacán",
+      "columna_2": "Sahuayo",
+      "columna_3": "Marcos Castellanos",
+      "columna_4": 2748.0,
+      "columna_5": 162.0,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 46,
+      "columna_1": "Michoacán",
+      "columna_2": "Sahuayo",
+      "columna_3": "Pajacuarán",
+      "columna_4": 14106.1,
+      "columna_5": 3756.1,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 47,
+      "columna_1": "Michoacán",
+      "columna_2": "Sahuayo",
+      "columna_3": "Cojumatlán de Régules",
+      "columna_4": 3198.36,
+      "columna_5": 472.36,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 48,
+      "columna_1": "Michoacán",
+      "columna_2": "Sahuayo",
+      "columna_3": "Sahuayo",
+      "columna_4": 6412.22,
+      "columna_5": 1148.22,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 49,
+      "columna_1": "Michoacán",
+      "columna_2": "Sahuayo",
+      "columna_3": "Venustiano Carranza",
+      "columna_4": 16326.1,
+      "columna_5": 3137.17,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 50,
+      "columna_1": "Michoacán",
+      "columna_2": "Sahuayo",
+      "columna_3": "Villamar",
+      "columna_4": 11937.5,
+      "columna_5": 2142.0,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 51,
+      "columna_1": "Michoacán",
+      "columna_2": "Sahuayo",
+      "columna_3": "Vista Hermosa",
+      "columna_4": 3642.0,
+      "columna_5": 7.0,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 52,
+      "columna_1": "Michoacán",
+      "columna_2": "La Piedad",
+      "columna_3": "Angamacutiro",
+      "columna_4": 5098.0,
+      "columna_5": 188.57,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 53,
+      "columna_1": "Michoacán",
+      "columna_2": "La Piedad",
+      "columna_3": "Coeneo",
+      "columna_4": 4549.0,
+      "columna_5": 247.0,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 54,
+      "columna_1": "Michoacán",
+      "columna_2": "La Piedad",
+      "columna_3": "Churintzio",
+      "columna_4": 6083.82,
+      "columna_5": 249.82,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 55,
+      "columna_1": "Michoacán",
+      "columna_2": "La Piedad",
+      "columna_3": "Huaniqueo",
+      "columna_4": 4616.0,
+      "columna_5": 265.0,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 56,
+      "columna_1": "Michoacán",
+      "columna_2": "La Piedad",
+      "columna_3": "Jiménez",
+      "columna_4": 8272.5,
+      "columna_5": 1519.0,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 57,
+      "columna_1": "Michoacán",
+      "columna_2": "La Piedad",
+      "columna_3": "Morelos",
+      "columna_4": 702.41,
+      "columna_5": 81.0,
+      "columna_6": 19.41
+    },
+    {
+      "columna_0": 58,
+      "columna_1": "Michoacán",
+      "columna_2": "La Piedad",
+      "columna_3": "Numarán",
+      "columna_4": 6225.97,
+      "columna_5": 263.97,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 59,
+      "columna_1": "Michoacán",
+      "columna_2": "La Piedad",
+      "columna_3": "Panindícuaro",
+      "columna_4": 6224.59,
+      "columna_5": 1095.59,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 60,
+      "columna_1": "Michoacán",
+      "columna_2": "La Piedad",
+      "columna_3": "Penjamillo",
+      "columna_4": 18591.0,
+      "columna_5": 350.51,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 61,
+      "columna_1": "Michoacán",
+      "columna_2": "La Piedad",
+      "columna_3": "La Piedad",
+      "columna_4": 11627.46,
+      "columna_5": 596.46,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 62,
+      "columna_1": "Michoacán",
+      "columna_2": "La Piedad",
+      "columna_3": "Puruándiro",
+      "columna_4": 20595.0,
+      "columna_5": 405.0,
+      "columna_6": 50.0
+    },
+    {
+      "columna_0": 63,
+      "columna_1": "Michoacán",
+      "columna_2": "La Piedad",
+      "columna_3": "Tanhuato",
+      "columna_4": 12535.27,
+      "columna_5": 1044.47,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 64,
+      "columna_1": "Michoacán",
+      "columna_2": "La Piedad",
+      "columna_3": "Vista Hermosa",
+      "columna_4": 10473.47,
+      "columna_5": 648.47,
+      "columna_6": 5.0
+    },
+    {
+      "columna_0": 65,
+      "columna_1": "Michoacán",
+      "columna_2": "La Piedad",
+      "columna_3": "Yurécuaro",
+      "columna_4": 6654.0,
+      "columna_5": 563.2,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 66,
+      "columna_1": "Michoacán",
+      "columna_2": "La Piedad",
+      "columna_3": "Zacapu",
+      "columna_4": 16483.0,
+      "columna_5": 5167.0,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 67,
+      "columna_1": "Michoacán",
+      "columna_2": "La Piedad",
+      "columna_3": "Zináparo",
+      "columna_4": 5443.31,
+      "columna_5": 195.31,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 68,
+      "columna_1": "Michoacán",
+      "columna_2": "La Piedad",
+      "columna_3": "José Sixto Verduzco",
+      "columna_4": 14493.0,
+      "columna_5": 2862.35,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 69,
+      "columna_1": "Michoacán",
+      "columna_2": "Pátzcuaro",
+      "columna_3": "Ario",
+      "columna_4": 21534.0,
+      "columna_5": 20370.04,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 70,
+      "columna_1": "Michoacán",
+      "columna_2": "Pátzcuaro",
+      "columna_3": "Erongarícuaro",
+      "columna_4": 3741.78,
+      "columna_5": 1411.78,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 71,
+      "columna_1": "Michoacán",
+      "columna_2": "Pátzcuaro",
+      "columna_3": "Huiramba",
+      "columna_4": 1761.0,
+      "columna_5": 380.46,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 72,
+      "columna_1": "Michoacán",
+      "columna_2": "Pátzcuaro",
+      "columna_3": "Lagunillas",
+      "columna_4": 1373.0,
+      "columna_5": 176.0,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 73,
+      "columna_1": "Michoacán",
+      "columna_2": "Pátzcuaro",
+      "columna_3": "Pátzcuaro",
+      "columna_4": 4347.0,
+      "columna_5": 1574.0,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 74,
+      "columna_1": "Michoacán",
+      "columna_2": "Pátzcuaro",
+      "columna_3": "Quiroga",
+      "columna_4": 1937.15,
+      "columna_5": 448.0,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 75,
+      "columna_1": "Michoacán",
+      "columna_2": "Pátzcuaro",
+      "columna_3": "Salvador Escalante",
+      "columna_4": 18151.0,
+      "columna_5": 17172.0,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 76,
+      "columna_1": "Michoacán",
+      "columna_2": "Pátzcuaro",
+      "columna_3": "Tacámbaro",
+      "columna_4": 24906.29,
+      "columna_5": 21490.65,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 77,
+      "columna_1": "Michoacán",
+      "columna_2": "Pátzcuaro",
+      "columna_3": "Turicato",
+      "columna_4": 10411.69,
+      "columna_5": 8283.15,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 78,
+      "columna_1": "Michoacán",
+      "columna_2": "Pátzcuaro",
+      "columna_3": "Tzintzuntzan",
+      "columna_4": 2763.0,
+      "columna_5": 358.0,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 79,
+      "columna_1": "Michoacán",
+      "columna_2": "Morelia",
+      "columna_3": "Acuitzio",
+      "columna_4": 8372.0,
+      "columna_5": 2980.0,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 80,
+      "columna_1": "Michoacán",
+      "columna_2": "Morelia",
+      "columna_3": "Álvaro Obregón",
+      "columna_4": 5968.76,
+      "columna_5": 453.26,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 81,
+      "columna_1": "Michoacán",
+      "columna_2": "Morelia",
+      "columna_3": "Copándaro",
+      "columna_4": 1802.81,
+      "columna_5": 740.17,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 82,
+      "columna_1": "Michoacán",
+      "columna_2": "Morelia",
+      "columna_3": "Cuitzeo",
+      "columna_4": 2294.01,
+      "columna_5": 394.01,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 83,
+      "columna_1": "Michoacán",
+      "columna_2": "Morelia",
+      "columna_3": "Charo",
+      "columna_4": 4815.02,
+      "columna_5": 406.28,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 84,
+      "columna_1": "Michoacán",
+      "columna_2": "Morelia",
+      "columna_3": "Chucándiro",
+      "columna_4": 1199.85,
+      "columna_5": 179.85,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 85,
+      "columna_1": "Michoacán",
+      "columna_2": "Morelia",
+      "columna_3": "Huandacareo",
+      "columna_4": 1714.81,
+      "columna_5": 365.81,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 86,
+      "columna_1": "Michoacán",
+      "columna_2": "Morelia",
+      "columna_3": "Indaparapeo",
+      "columna_4": 8867.22,
+      "columna_5": 137.72,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 87,
+      "columna_1": "Michoacán",
+      "columna_2": "Morelia",
+      "columna_3": "Madero",
+      "columna_4": 14153.5,
+      "columna_5": 2966.0,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 88,
+      "columna_1": "Michoacán",
+      "columna_2": "Morelia",
+      "columna_3": "Morelia",
+      "columna_4": 19662.1,
+      "columna_5": 2667.1,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 89,
+      "columna_1": "Michoacán",
+      "columna_2": "Morelia",
+      "columna_3": "Queréndaro",
+      "columna_4": 16593.76,
+      "columna_5": 393.06,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 90,
+      "columna_1": "Michoacán",
+      "columna_2": "Morelia",
+      "columna_3": "Santa Ana Maya",
+      "columna_4": 4671.57,
+      "columna_5": 435.07,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 91,
+      "columna_1": "Michoacán",
+      "columna_2": "Morelia",
+      "columna_3": "Tarímbaro",
+      "columna_4": 8110.73,
+      "columna_5": 1228.33,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 92,
+      "columna_1": "Michoacán",
+      "columna_2": "Morelia",
+      "columna_3": "Tzitzio",
+      "columna_4": 5017.4,
+      "columna_5": 427.0,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 93,
+      "columna_1": "Michoacán",
+      "columna_2": "Morelia",
+      "columna_3": "Zinapécuaro",
+      "columna_4": 6375.0,
+      "columna_5": 2480.64,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 94,
+      "columna_1": "Michoacán",
+      "columna_2": "Huetamo",
+      "columna_3": "Carácuaro",
+      "columna_4": 4548.34,
+      "columna_5": 293.34,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 95,
+      "columna_1": "Michoacán",
+      "columna_2": "Huetamo",
+      "columna_3": "Huetamo",
+      "columna_4": 10291.6,
+      "columna_5": 3328.33,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 96,
+      "columna_1": "Michoacán",
+      "columna_2": "Huetamo",
+      "columna_3": "Nocupétaro",
+      "columna_4": 3611.0,
+      "columna_5": 226.0,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 97,
+      "columna_1": "Michoacán",
+      "columna_2": "Huetamo",
+      "columna_3": "San Lucas",
+      "columna_4": 7884.4,
+      "columna_5": 2500.17,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 98,
+      "columna_1": "Michoacán",
+      "columna_2": "Huetamo",
+      "columna_3": "Tiquicheo de Nicolás Romero",
+      "columna_4": 7451.0,
+      "columna_5": 422.0,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 99,
+      "columna_1": "Michoacán",
+      "columna_2": "Huetamo",
+      "columna_3": "Tuzantla",
+      "columna_4": 6986.5,
+      "columna_5": 923.92,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 100,
+      "columna_1": "Michoacán",
+      "columna_2": "Zitácuaro",
+      "columna_3": "Angangueo",
+      "columna_4": 1113.0,
+      "columna_5": 79.0,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 101,
+      "columna_1": "Michoacán",
+      "columna_2": "Zitácuaro",
+      "columna_3": "Aporo",
+      "columna_4": 1560.0,
+      "columna_5": 37.0,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 102,
+      "columna_1": "Michoacán",
+      "columna_2": "Zitácuaro",
+      "columna_3": "Contepec",
+      "columna_4": 14650.4,
+      "columna_5": 282.0,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 103,
+      "columna_1": "Michoacán",
+      "columna_2": "Zitácuaro",
+      "columna_3": "Epitacio Huerta",
+      "columna_4": 12398.04,
+      "columna_5": 137.0,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 104,
+      "columna_1": "Michoacán",
+      "columna_2": "Zitácuaro",
+      "columna_3": "Hidalgo",
+      "columna_4": 10469.0,
+      "columna_5": 441.0,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 105,
+      "columna_1": "Michoacán",
+      "columna_2": "Zitácuaro",
+      "columna_3": "Irimbo",
+      "columna_4": 3787.5,
+      "columna_5": 383.5,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 106,
+      "columna_1": "Michoacán",
+      "columna_2": "Zitácuaro",
+      "columna_3": "Juárez",
+      "columna_4": 3739.0,
+      "columna_5": 2912.71,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 107,
+      "columna_1": "Michoacán",
+      "columna_2": "Zitácuaro",
+      "columna_3": "Jungapeo",
+      "columna_4": 7816.5,
+      "columna_5": 4355.11,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 108,
+      "columna_1": "Michoacán",
+      "columna_2": "Zitácuaro",
+      "columna_3": "Maravatío",
+      "columna_4": 24760.5,
+      "columna_5": 2210.5,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 109,
+      "columna_1": "Michoacán",
+      "columna_2": "Zitácuaro",
+      "columna_3": "Ocampo",
+      "columna_4": 2995.5,
+      "columna_5": 291.5,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 110,
+      "columna_1": "Michoacán",
+      "columna_2": "Zitácuaro",
+      "columna_3": "Senguio",
+      "columna_4": 6496.5,
+      "columna_5": 817.5,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 111,
+      "columna_1": "Michoacán",
+      "columna_2": "Zitácuaro",
+      "columna_3": "Susupuato",
+      "columna_4": 4418.0,
+      "columna_5": 1805.93,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 112,
+      "columna_1": "Michoacán",
+      "columna_2": "Zitácuaro",
+      "columna_3": "Tlalpujahua",
+      "columna_4": 2992.5,
+      "columna_5": 192.0,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 113,
+      "columna_1": "Michoacán",
+      "columna_2": "Zitácuaro",
+      "columna_3": "Tuxpan",
+      "columna_4": 7505.78,
+      "columna_5": 1797.78,
+      "columna_6": 0.0
+    },
+    {
+      "columna_0": 114,
+      "columna_1": "Michoacán",
+      "columna_2": "Zitácuaro",
+      "columna_3": "Zitácuaro",
+      "columna_4": 11724.0,
+      "columna_5": 3958.04,
+      "columna_6": 0.0
+    }
+  ]
+}
