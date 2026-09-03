@@ -4,6 +4,11 @@ import json
 import unicodedata
 import pandas as pd
 import ee
+from dotenv import load_dotenv
+from google.oauth2.credentials import Credentials
+
+# Carga automática del archivo .env si existe en local
+load_dotenv()
 
 def normalizar_texto(texto):
     """Elimina acentos y convierte a minúsculas para búsquedas comparativas."""
@@ -33,23 +38,33 @@ class ProcesadorSatelitalModular:
         self.carpeta_salida = os.path.abspath(os.path.join("reports", "procesados"))
         os.makedirs(self.carpeta_salida, exist_ok=True)
         
-        # Inicialización inteligente de Earth Engine (Local vs Render)
+        # Inicialización estricta basada exclusivamente en la variable de entorno / .env
         try:
             credenciales_json = os.environ.get("EARTHENGINE_CREDENTIALS")
-            if credenciales_json:
-                cred_dict = json.loads(credenciales_json)
-                credentials = ee.RefreshCredentials(
-                    cred_dict.get("client_id"),
-                    cred_dict.get("client_secret"),
-                    cred_dict.get("refresh_token")
-                )
-                ee.Initialize(credentials=credentials, project=self.project)
-                print(" [✓] Earth Engine inicializado en modo Cloud (Render) exitosamente.")
-            else:
-                ee.Initialize(project=self.project)
-                print(" [✓] Earth Engine inicializado en modo Local exitosamente.")
+            
+            if not credenciales_json:
+                raise ValueError("No se encontró la variable de entorno 'EARTHENGINE_CREDENTIALS'. Asegúrate de configurarla en tu archivo .env o en el panel de Render.")
+
+            cred_dict = json.loads(credenciales_json)
+            
+            # Autenticación oficial utilizando Google OAuth2 Credentials
+            credentials = Credentials(
+                token=None,  # Se autogenerará de forma segura usando el refresh_token
+                refresh_token=cred_dict.get("refresh_token"),
+                client_id=cred_dict.get("client_id"),
+                client_secret=cred_dict.get("client_secret"),
+                token_uri="https://oauth2.googleapis.com/token",
+                scopes=cred_dict.get("scopes", ["https://www.googleapis.com/auth/earthengine"])
+            )
+            
+            # Tomamos el proyecto del JSON o del parámetro por defecto
+            project_id = cred_dict.get("project", self.project)
+            
+            ee.Initialize(credentials=credentials, project=project_id)
+            print(f" [✓] Earth Engine inicializado correctamente usando la variable de entorno (Proyecto: {project_id}).")
+            
         except Exception as e:
-            print(" [!] Error al inicializar Earth Engine.")
+            print(f" [!] Error crítico al inicializar Earth Engine por credenciales de entorno: {e}")
             raise e
 
     def procesar(self):
