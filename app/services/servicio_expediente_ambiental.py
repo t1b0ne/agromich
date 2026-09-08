@@ -1,5 +1,6 @@
 import os
 import json
+import unicodedata
 import ee
 from dotenv import load_dotenv
 from google.oauth2.credentials import Credentials
@@ -30,7 +31,7 @@ class ExpedienteAmbientalService:
         self.nombre_huerto = datos_predio.get("nombre_huerto", "Predio sin nombre")
         self.productor = datos_predio.get("productor", "Desconocido")
         self.municipio = datos_predio.get("municipio", "Michoacán")
-        self.cultivo_declarado = datos_predio.get("cultivo", "aguacate").lower()
+        self.cultivo_declarado = self._normalizar_cultivo(datos_predio.get("cultivo", "aguacate"))
         self.anio_inicio = datos_predio.get("anio_inicio", 2018)
         self.anio_fin = datos_predio.get("anio_fin", 2026)
         
@@ -39,6 +40,23 @@ class ExpedienteAmbientalService:
             self.ee_geom = ee.Geometry(geom_raw["geometry"])
         else:
             self.ee_geom = ee.Geometry(geom_raw)
+
+    @staticmethod
+    def _normalizar_cultivo(cultivo: str) -> str:
+        """Normaliza nombres de cultivo para comparar aguacate y berries."""
+        texto = unicodedata.normalize("NFKD", str(cultivo or ""))
+        return "".join(caracter for caracter in texto if not unicodedata.combining(caracter)).lower().strip()
+
+    @classmethod
+    def _familia_cultivo(cls, cultivo: str) -> str:
+        cultivo = cls._normalizar_cultivo(cultivo)
+        if any(nombre in cultivo for nombre in (
+            "fresa", "frutilla", "berry", "berries", "zarzamora", "frambuesa", "arandano"
+        )):
+            return "berries"
+        if "aguacate" in cultivo or "avocado" in cultivo:
+            return "aguacate"
+        return "desconocido"
 
     def _verificar_uso_suelo_urbano(self):
         try:
@@ -68,16 +86,24 @@ class ExpedienteAmbientalService:
             stats = textura.reduceRegion(ee.Reducer.mean(), self.ee_geom, scale=10, maxPixels=1e9).getInfo()
             valor_textura = stats.get('textura', 0) or 0
 
-            cultivo_inferido = "berries" if valor_textura < 140 else "aguacate"
+            # La textura se usa como indicador de alerta, no como prueba
+            # definitiva. El umbral puede calibrarse sin modificar el código.
+            umbral_berries = float(os.getenv("CULTIVO_TEXTURA_BERRIES_UMBRAL", "22"))
+            cultivo_inferido = "berries" if valor_textura >= umbral_berries else "aguacate"
+            familia_declarada = self._familia_cultivo(self.cultivo_declarado)
             incongruencia = False
-            mensaje = "El cultivo declarado coincide con la firma espectral."
+            mensaje = "Clasificación preliminar basada en textura; requiere validación agronómica."
 
-            if "aguacate" in self.cultivo_declarado and cultivo_inferido == "berries":
+            if familia_declarada in ("aguacate", "berries") and cultivo_inferido != familia_declarada:
                 incongruencia = True
-                mensaje = "⚠️ Declaró 'Aguacate', pero la firma satelital muestra patrones de macrotúneles (Berries)."
-            elif "berry" in self.cultivo_declarado and cultivo_inferido == "aguacate":
-                incongruencia = True
-                mensaje = "⚠️ Declaró 'Berries', pero la textura espacial muestra dosel arbóreo (Aguacate)."
+                if familia_declarada == "aguacate":
+                    mensaje = "⚠️ Declaró 'Aguacate', pero la textura espacial es compatible con patrones de berries/macrotúneles."
+                else:
+                    mensaje = "⚠️ Declaró un cultivo de berries, pero la textura espacial es compatible con dosel de aguacate."
+            elif familia_declarada in ("aguacate", "berries"):
+                mensaje = "El cultivo declarado coincide con la clasificación preliminar por textura."
+            else:
+                mensaje = "Clasificación preliminar basada en textura; requiere validación agronómica."
 
             return cultivo_inferido, round(valor_textura, 2), incongruencia, mensaje
         except Exception:
