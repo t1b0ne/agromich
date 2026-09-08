@@ -1,0 +1,739 @@
+{
+    "tipo_reporte": "Especifico por Municipio",
+    "estado": "Michoacán de Ocampo",
+    "municipio": "Gabriel Zamora",
+    "periodo": {
+        "inicio": "2025-01-01",
+        "fin": "2025-12-31"
+    },
+    "total_tomas_evaluadas": 103,
+    "resumen_promedios": {
+        "ndvi_promedio": 0.4735,
+        "ndvi_maximo": 0.8088,
+        "ndwi_humedad_promedio": 0.0202,
+        "ndre_nitrogeno_promedio": 0.3338
+    },
+    "serie_temporal": [
+        {
+            "fecha": "2025-01-03",
+            "ndvi": 0.4304,
+            "estres_hidrico_ndwi": -0.0411,
+            "nitrogeno_ndre": 0.3122,
+            "savi": 0.245
+        },
+        {
+            "fecha": "2025-01-03",
+            "ndvi": 0.4862,
+            "estres_hidrico_ndwi": 0.0099,
+            "nitrogeno_ndre": 0.3531,
+            "savi": 0.2761
+        },
+        {
+            "fecha": "2025-01-13",
+            "ndvi": 0.467,
+            "estres_hidrico_ndwi": -0.0875,
+            "nitrogeno_ndre": 0.3323,
+            "savi": 0.2336
+        },
+        {
+            "fecha": "2025-01-13",
+            "ndvi": 0.5284,
+            "estres_hidrico_ndwi": -0.0186,
+            "nitrogeno_ndre": 0.3776,
+            "savi": 0.2737
+        },
+        {
+            "fecha": "2025-01-18",
+            "ndvi": 0.4509,
+            "estres_hidrico_ndwi": -0.0924,
+            "nitrogeno_ndre": 0.3195,
+            "savi": 0.2321
+        },
+        {
+            "fecha": "2025-01-18",
+            "ndvi": 0.5075,
+            "estres_hidrico_ndwi": -0.0288,
+            "nitrogeno_ndre": 0.361,
+            "savi": 0.2684
+        },
+        {
+            "fecha": "2025-01-23",
+            "ndvi": 0.4565,
+            "estres_hidrico_ndwi": -0.0755,
+            "nitrogeno_ndre": 0.3245,
+            "savi": 0.2407
+        },
+        {
+            "fecha": "2025-01-23",
+            "ndvi": 0.5116,
+            "estres_hidrico_ndwi": -0.0121,
+            "nitrogeno_ndre": 0.366,
+            "savi": 0.2772
+        },
+        {
+            "fecha": "2025-01-28",
+            "ndvi": 0.4335,
+            "estres_hidrico_ndwi": -0.0799,
+            "nitrogeno_ndre": 0.296,
+            "savi": 0.2366
+        },
+        {
+            "fecha": "2025-01-28",
+            "ndvi": 0.4881,
+            "estres_hidrico_ndwi": -0.0195,
+            "nitrogeno_ndre": 0.3338,
+            "savi": 0.2707
+        },
+        {
+            "fecha": "2025-02-02",
+            "ndvi": 0.4134,
+            "estres_hidrico_ndwi": -0.0744,
+            "nitrogeno_ndre": 0.3008,
+            "savi": 0.228
+        },
+        {
+            "fecha": "2025-02-02",
+            "ndvi": 0.4807,
+            "estres_hidrico_ndwi": -0.0174,
+            "nitrogeno_ndre": 0.3478,
+            "savi": 0.2687
+        },
+        {
+            "fecha": "2025-02-07",
+            "ndvi": 0.4282,
+            "estres_hidrico_ndwi": -0.0825,
+            "nitrogeno_ndre": 0.291,
+            "savi": 0.2384
+        },
+        {
+            "fecha": "2025-02-07",
+            "ndvi": 0.4739,
+            "estres_hidrico_ndwi": -0.0214,
+            "nitrogeno_ndre": 0.324,
+            "savi": 0.269
+        },
+        {
+            "fecha": "2025-02-12",
+            "ndvi": 0.4123,
+            "estres_hidrico_ndwi": -0.0745,
+            "nitrogeno_ndre": 0.2999,
+            "savi": 0.2326
+        },
+        {
+            "fecha": "2025-02-12",
+            "ndvi": 0.4704,
+            "estres_hidrico_ndwi": -0.014,
+            "nitrogeno_ndre": 0.3427,
+            "savi": 0.2703
+        },
+        {
+            "fecha": "2025-02-17",
+            "ndvi": 0.2911,
+            "estres_hidrico_ndwi": -0.0244,
+            "nitrogeno_ndre": 0.2036,
+            "savi": 0.1836
+        },
+        {
+            "fecha": "2025-02-22",
+            "ndvi": 0.4015,
+            "estres_hidrico_ndwi": -0.1034,
+            "nitrogeno_ndre": 0.2965,
+            "savi": 0.2238
+        },
+        {
+            "fecha": "2025-02-22",
+            "ndvi": 0.4692,
+            "estres_hidrico_ndwi": -0.0393,
+            "nitrogeno_ndre": 0.346,
+            "savi": 0.2671
+        },
+        {
+            "fecha": "2025-02-27",
+            "ndvi": 0.3971,
+            "estres_hidrico_ndwi": -0.0922,
+            "nitrogeno_ndre": 0.2734,
+            "savi": 0.2287
+        },
+        {
+            "fecha": "2025-02-27",
+            "ndvi": 0.4648,
+            "estres_hidrico_ndwi": -0.0266,
+            "nitrogeno_ndre": 0.319,
+            "savi": 0.2725
+        },
+        {
+            "fecha": "2025-03-04",
+            "ndvi": 0.3852,
+            "estres_hidrico_ndwi": -0.0863,
+            "nitrogeno_ndre": 0.2775,
+            "savi": 0.2256
+        },
+        {
+            "fecha": "2025-03-04",
+            "ndvi": 0.4562,
+            "estres_hidrico_ndwi": -0.0212,
+            "nitrogeno_ndre": 0.329,
+            "savi": 0.2727
+        },
+        {
+            "fecha": "2025-03-09",
+            "ndvi": 0.3744,
+            "estres_hidrico_ndwi": -0.0947,
+            "nitrogeno_ndre": 0.2561,
+            "savi": 0.2225
+        },
+        {
+            "fecha": "2025-03-09",
+            "ndvi": 0.4429,
+            "estres_hidrico_ndwi": -0.0285,
+            "nitrogeno_ndre": 0.3015,
+            "savi": 0.2676
+        },
+        {
+            "fecha": "2025-03-14",
+            "ndvi": 0.3566,
+            "estres_hidrico_ndwi": -0.0813,
+            "nitrogeno_ndre": 0.2553,
+            "savi": 0.2176
+        },
+        {
+            "fecha": "2025-03-14",
+            "ndvi": 0.4364,
+            "estres_hidrico_ndwi": -0.0179,
+            "nitrogeno_ndre": 0.3116,
+            "savi": 0.269
+        },
+        {
+            "fecha": "2025-03-21",
+            "ndvi": 0.3533,
+            "estres_hidrico_ndwi": -0.0941,
+            "nitrogeno_ndre": 0.2565,
+            "savi": 0.2205
+        },
+        {
+            "fecha": "2025-03-21",
+            "ndvi": 0.4042,
+            "estres_hidrico_ndwi": -0.027,
+            "nitrogeno_ndre": 0.2908,
+            "savi": 0.2554
+        },
+        {
+            "fecha": "2025-03-24",
+            "ndvi": 0.3328,
+            "estres_hidrico_ndwi": -0.0927,
+            "nitrogeno_ndre": 0.2419,
+            "savi": 0.2114
+        },
+        {
+            "fecha": "2025-03-24",
+            "ndvi": 0.3963,
+            "estres_hidrico_ndwi": -0.0307,
+            "nitrogeno_ndre": 0.2876,
+            "savi": 0.2531
+        },
+        {
+            "fecha": "2025-03-29",
+            "ndvi": 0.3515,
+            "estres_hidrico_ndwi": -0.088,
+            "nitrogeno_ndre": 0.2366,
+            "savi": 0.2225
+        },
+        {
+            "fecha": "2025-03-29",
+            "ndvi": 0.4167,
+            "estres_hidrico_ndwi": -0.0225,
+            "nitrogeno_ndre": 0.278,
+            "savi": 0.2672
+        },
+        {
+            "fecha": "2025-04-03",
+            "ndvi": 0.3326,
+            "estres_hidrico_ndwi": -0.0965,
+            "nitrogeno_ndre": 0.2375,
+            "savi": 0.2103
+        },
+        {
+            "fecha": "2025-04-03",
+            "ndvi": 0.3987,
+            "estres_hidrico_ndwi": -0.034,
+            "nitrogeno_ndre": 0.2814,
+            "savi": 0.2564
+        },
+        {
+            "fecha": "2025-04-08",
+            "ndvi": 0.3362,
+            "estres_hidrico_ndwi": -0.0965,
+            "nitrogeno_ndre": 0.2277,
+            "savi": 0.217
+        },
+        {
+            "fecha": "2025-04-08",
+            "ndvi": 0.4001,
+            "estres_hidrico_ndwi": -0.0374,
+            "nitrogeno_ndre": 0.2655,
+            "savi": 0.2606
+        },
+        {
+            "fecha": "2025-04-10",
+            "ndvi": 0.3211,
+            "estres_hidrico_ndwi": -0.1081,
+            "nitrogeno_ndre": 0.23,
+            "savi": 0.2046
+        },
+        {
+            "fecha": "2025-04-10",
+            "ndvi": 0.384,
+            "estres_hidrico_ndwi": -0.0493,
+            "nitrogeno_ndre": 0.2705,
+            "savi": 0.248
+        },
+        {
+            "fecha": "2025-04-13",
+            "ndvi": 0.3201,
+            "estres_hidrico_ndwi": -0.094,
+            "nitrogeno_ndre": 0.228,
+            "savi": 0.2072
+        },
+        {
+            "fecha": "2025-04-13",
+            "ndvi": 0.3818,
+            "estres_hidrico_ndwi": -0.034,
+            "nitrogeno_ndre": 0.2695,
+            "savi": 0.2509
+        },
+        {
+            "fecha": "2025-04-18",
+            "ndvi": 0.3244,
+            "estres_hidrico_ndwi": -0.1042,
+            "nitrogeno_ndre": 0.2226,
+            "savi": 0.2148
+        },
+        {
+            "fecha": "2025-04-18",
+            "ndvi": 0.3805,
+            "estres_hidrico_ndwi": -0.0432,
+            "nitrogeno_ndre": 0.2571,
+            "savi": 0.254
+        },
+        {
+            "fecha": "2025-04-23",
+            "ndvi": 0.3119,
+            "estres_hidrico_ndwi": -0.095,
+            "nitrogeno_ndre": 0.2244,
+            "savi": 0.203
+        },
+        {
+            "fecha": "2025-04-23",
+            "ndvi": 0.3702,
+            "estres_hidrico_ndwi": -0.0362,
+            "nitrogeno_ndre": 0.2637,
+            "savi": 0.2466
+        },
+        {
+            "fecha": "2025-04-30",
+            "ndvi": 0.3034,
+            "estres_hidrico_ndwi": -0.1205,
+            "nitrogeno_ndre": 0.2286,
+            "savi": 0.1988
+        },
+        {
+            "fecha": "2025-04-30",
+            "ndvi": 0.3651,
+            "estres_hidrico_ndwi": -0.0638,
+            "nitrogeno_ndre": 0.2671,
+            "savi": 0.2424
+        },
+        {
+            "fecha": "2025-05-03",
+            "ndvi": 0.3397,
+            "estres_hidrico_ndwi": -0.0971,
+            "nitrogeno_ndre": 0.2398,
+            "savi": 0.2267
+        },
+        {
+            "fecha": "2025-05-03",
+            "ndvi": 0.3733,
+            "estres_hidrico_ndwi": -0.0373,
+            "nitrogeno_ndre": 0.266,
+            "savi": 0.2527
+        },
+        {
+            "fecha": "2025-05-08",
+            "ndvi": 0.3082,
+            "estres_hidrico_ndwi": -0.1027,
+            "nitrogeno_ndre": 0.2172,
+            "savi": 0.2056
+        },
+        {
+            "fecha": "2025-05-08",
+            "ndvi": 0.368,
+            "estres_hidrico_ndwi": -0.0455,
+            "nitrogeno_ndre": 0.2534,
+            "savi": 0.2485
+        },
+        {
+            "fecha": "2025-05-13",
+            "ndvi": 0.3126,
+            "estres_hidrico_ndwi": -0.106,
+            "nitrogeno_ndre": 0.2316,
+            "savi": 0.2073
+        },
+        {
+            "fecha": "2025-05-13",
+            "ndvi": 0.3788,
+            "estres_hidrico_ndwi": -0.0497,
+            "nitrogeno_ndre": 0.2758,
+            "savi": 0.2545
+        },
+        {
+            "fecha": "2025-05-18",
+            "ndvi": 0.3158,
+            "estres_hidrico_ndwi": -0.1055,
+            "nitrogeno_ndre": 0.2342,
+            "savi": 0.2112
+        },
+        {
+            "fecha": "2025-05-18",
+            "ndvi": 0.3807,
+            "estres_hidrico_ndwi": -0.0468,
+            "nitrogeno_ndre": 0.2717,
+            "savi": 0.2571
+        },
+        {
+            "fecha": "2025-05-20",
+            "ndvi": 0.2702,
+            "estres_hidrico_ndwi": -0.0956,
+            "nitrogeno_ndre": 0.1993,
+            "savi": 0.1824
+        },
+        {
+            "fecha": "2025-05-20",
+            "ndvi": 0.3625,
+            "estres_hidrico_ndwi": -0.0466,
+            "nitrogeno_ndre": 0.2608,
+            "savi": 0.2457
+        },
+        {
+            "fecha": "2025-05-23",
+            "ndvi": 0.109,
+            "estres_hidrico_ndwi": -0.0123,
+            "nitrogeno_ndre": 0.0633,
+            "savi": 0.0777
+        },
+        {
+            "fecha": "2025-06-27",
+            "ndvi": 0.7432,
+            "estres_hidrico_ndwi": 0.1797,
+            "nitrogeno_ndre": 0.457,
+            "savi": 0.4942
+        },
+        {
+            "fecha": "2025-06-27",
+            "ndvi": 0.7211,
+            "estres_hidrico_ndwi": 0.1917,
+            "nitrogeno_ndre": 0.4543,
+            "savi": 0.4776
+        },
+        {
+            "fecha": "2025-07-17",
+            "ndvi": 0.6639,
+            "estres_hidrico_ndwi": 0.2068,
+            "nitrogeno_ndre": 0.4418,
+            "savi": 0.4755
+        },
+        {
+            "fecha": "2025-07-19",
+            "ndvi": 0.5025,
+            "estres_hidrico_ndwi": 0.2131,
+            "nitrogeno_ndre": 0.361,
+            "savi": 0.3704
+        },
+        {
+            "fecha": "2025-07-19",
+            "ndvi": 0.5481,
+            "estres_hidrico_ndwi": 0.2015,
+            "nitrogeno_ndre": 0.3963,
+            "savi": 0.3913
+        },
+        {
+            "fecha": "2025-07-22",
+            "ndvi": 0.7013,
+            "estres_hidrico_ndwi": 0.2465,
+            "nitrogeno_ndre": 0.509,
+            "savi": 0.4692
+        },
+        {
+            "fecha": "2025-08-06",
+            "ndvi": 0.8088,
+            "estres_hidrico_ndwi": 0.2567,
+            "nitrogeno_ndre": 0.5147,
+            "savi": 0.5658
+        },
+        {
+            "fecha": "2025-08-11",
+            "ndvi": 0.7842,
+            "estres_hidrico_ndwi": 0.2514,
+            "nitrogeno_ndre": 0.557,
+            "savi": 0.5428
+        },
+        {
+            "fecha": "2025-08-11",
+            "ndvi": 0.7017,
+            "estres_hidrico_ndwi": 0.2091,
+            "nitrogeno_ndre": 0.5081,
+            "savi": 0.4715
+        },
+        {
+            "fecha": "2025-08-26",
+            "ndvi": 0.6297,
+            "estres_hidrico_ndwi": 0.2143,
+            "nitrogeno_ndre": 0.4236,
+            "savi": 0.4469
+        },
+        {
+            "fecha": "2025-08-26",
+            "ndvi": 0.6116,
+            "estres_hidrico_ndwi": 0.202,
+            "nitrogeno_ndre": 0.418,
+            "savi": 0.4216
+        },
+        {
+            "fecha": "2025-08-28",
+            "ndvi": 0.7459,
+            "estres_hidrico_ndwi": 0.2325,
+            "nitrogeno_ndre": 0.5284,
+            "savi": 0.5209
+        },
+        {
+            "fecha": "2025-09-05",
+            "ndvi": 0.7241,
+            "estres_hidrico_ndwi": 0.2311,
+            "nitrogeno_ndre": 0.4771,
+            "savi": 0.4934
+        },
+        {
+            "fecha": "2025-09-05",
+            "ndvi": 0.7136,
+            "estres_hidrico_ndwi": 0.2197,
+            "nitrogeno_ndre": 0.4787,
+            "savi": 0.4731
+        },
+        {
+            "fecha": "2025-09-10",
+            "ndvi": 0.3884,
+            "estres_hidrico_ndwi": 0.1734,
+            "nitrogeno_ndre": 0.3047,
+            "savi": 0.279
+        },
+        {
+            "fecha": "2025-09-20",
+            "ndvi": 0.6308,
+            "estres_hidrico_ndwi": 0.2172,
+            "nitrogeno_ndre": 0.4682,
+            "savi": 0.4226
+        },
+        {
+            "fecha": "2025-10-07",
+            "ndvi": 0.6457,
+            "estres_hidrico_ndwi": 0.1701,
+            "nitrogeno_ndre": 0.4635,
+            "savi": 0.3935
+        },
+        {
+            "fecha": "2025-10-07",
+            "ndvi": 0.6605,
+            "estres_hidrico_ndwi": 0.1886,
+            "nitrogeno_ndre": 0.4806,
+            "savi": 0.4125
+        },
+        {
+            "fecha": "2025-10-20",
+            "ndvi": 0.6171,
+            "estres_hidrico_ndwi": 0.23,
+            "nitrogeno_ndre": 0.4738,
+            "savi": 0.4178
+        },
+        {
+            "fecha": "2025-10-25",
+            "ndvi": 0.5763,
+            "estres_hidrico_ndwi": 0.1323,
+            "nitrogeno_ndre": 0.3898,
+            "savi": 0.3489
+        },
+        {
+            "fecha": "2025-10-25",
+            "ndvi": 0.602,
+            "estres_hidrico_ndwi": 0.172,
+            "nitrogeno_ndre": 0.4209,
+            "savi": 0.3727
+        },
+        {
+            "fecha": "2025-10-27",
+            "ndvi": 0.3322,
+            "estres_hidrico_ndwi": 0.1096,
+            "nitrogeno_ndre": 0.2529,
+            "savi": 0.2072
+        },
+        {
+            "fecha": "2025-10-27",
+            "ndvi": 0.4798,
+            "estres_hidrico_ndwi": 0.1491,
+            "nitrogeno_ndre": 0.3669,
+            "savi": 0.302
+        },
+        {
+            "fecha": "2025-10-30",
+            "ndvi": 0.6418,
+            "estres_hidrico_ndwi": 0.1102,
+            "nitrogeno_ndre": 0.4576,
+            "savi": 0.3724
+        },
+        {
+            "fecha": "2025-10-30",
+            "ndvi": 0.6862,
+            "estres_hidrico_ndwi": 0.1616,
+            "nitrogeno_ndre": 0.4963,
+            "savi": 0.4102
+        },
+        {
+            "fecha": "2025-11-04",
+            "ndvi": 0.6192,
+            "estres_hidrico_ndwi": 0.0791,
+            "nitrogeno_ndre": 0.406,
+            "savi": 0.3539
+        },
+        {
+            "fecha": "2025-11-04",
+            "ndvi": 0.6587,
+            "estres_hidrico_ndwi": 0.1414,
+            "nitrogeno_ndre": 0.4422,
+            "savi": 0.3902
+        },
+        {
+            "fecha": "2025-11-09",
+            "ndvi": 0.5807,
+            "estres_hidrico_ndwi": 0.0603,
+            "nitrogeno_ndre": 0.4121,
+            "savi": 0.3303
+        },
+        {
+            "fecha": "2025-11-09",
+            "ndvi": 0.616,
+            "estres_hidrico_ndwi": 0.126,
+            "nitrogeno_ndre": 0.4457,
+            "savi": 0.3659
+        },
+        {
+            "fecha": "2025-11-14",
+            "ndvi": 0.3593,
+            "estres_hidrico_ndwi": 0.1083,
+            "nitrogeno_ndre": 0.2453,
+            "savi": 0.2258
+        },
+        {
+            "fecha": "2025-11-14",
+            "ndvi": 0.4054,
+            "estres_hidrico_ndwi": 0.1714,
+            "nitrogeno_ndre": 0.2965,
+            "savi": 0.2651
+        },
+        {
+            "fecha": "2025-11-16",
+            "ndvi": 0.5298,
+            "estres_hidrico_ndwi": 0.0192,
+            "nitrogeno_ndre": 0.3741,
+            "savi": 0.2948
+        },
+        {
+            "fecha": "2025-11-16",
+            "ndvi": 0.5862,
+            "estres_hidrico_ndwi": 0.0849,
+            "nitrogeno_ndre": 0.4177,
+            "savi": 0.3397
+        },
+        {
+            "fecha": "2025-11-19",
+            "ndvi": 0.515,
+            "estres_hidrico_ndwi": 0.0042,
+            "nitrogeno_ndre": 0.3725,
+            "savi": 0.2869
+        },
+        {
+            "fecha": "2025-11-19",
+            "ndvi": 0.5868,
+            "estres_hidrico_ndwi": 0.0739,
+            "nitrogeno_ndre": 0.4239,
+            "savi": 0.3393
+        },
+        {
+            "fecha": "2025-12-14",
+            "ndvi": 0.492,
+            "estres_hidrico_ndwi": -0.0384,
+            "nitrogeno_ndre": 0.3348,
+            "savi": 0.2743
+        },
+        {
+            "fecha": "2025-12-14",
+            "ndvi": 0.5476,
+            "estres_hidrico_ndwi": 0.0309,
+            "nitrogeno_ndre": 0.3726,
+            "savi": 0.3137
+        },
+        {
+            "fecha": "2025-12-19",
+            "ndvi": 0.4672,
+            "estres_hidrico_ndwi": -0.0414,
+            "nitrogeno_ndre": 0.3348,
+            "savi": 0.2566
+        },
+        {
+            "fecha": "2025-12-19",
+            "ndvi": 0.5235,
+            "estres_hidrico_ndwi": 0.0211,
+            "nitrogeno_ndre": 0.3783,
+            "savi": 0.2941
+        },
+        {
+            "fecha": "2025-12-24",
+            "ndvi": 0.4514,
+            "estres_hidrico_ndwi": -0.0656,
+            "nitrogeno_ndre": 0.3099,
+            "savi": 0.2469
+        },
+        {
+            "fecha": "2025-12-24",
+            "ndvi": 0.5129,
+            "estres_hidrico_ndwi": -0.0022,
+            "nitrogeno_ndre": 0.3509,
+            "savi": 0.2846
+        },
+        {
+            "fecha": "2025-12-26",
+            "ndvi": 0.4364,
+            "estres_hidrico_ndwi": -0.0585,
+            "nitrogeno_ndre": 0.314,
+            "savi": 0.2398
+        },
+        {
+            "fecha": "2025-12-26",
+            "ndvi": 0.4971,
+            "estres_hidrico_ndwi": 0.0037,
+            "nitrogeno_ndre": 0.3569,
+            "savi": 0.2778
+        },
+        {
+            "fecha": "2025-12-29",
+            "ndvi": 0.4221,
+            "estres_hidrico_ndwi": -0.052,
+            "nitrogeno_ndre": 0.3087,
+            "savi": 0.2389
+        },
+        {
+            "fecha": "2025-12-29",
+            "ndvi": 0.4795,
+            "estres_hidrico_ndwi": 0.0063,
+            "nitrogeno_ndre": 0.3503,
+            "savi": 0.2742
+        }
+    ]
+}
