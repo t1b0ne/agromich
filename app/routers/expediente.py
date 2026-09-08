@@ -1,9 +1,13 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 from typing import Dict, Any, Optional
+
+from app.schemas.agro_schemas import SolicitudImagenesHistoricas
+from app.services.servicio_expediente import ServicioExpediente
 from app.services.servicio_expediente_ambiental import ExpedienteAmbientalService
 
-router = APIRouter(prefix="/api/v1/expediente", tags=["Expediente de Cumplimiento Ambiental"])
+router = APIRouter(prefix="/api/v1/expediente", tags=["Expediente de Cumplimiento Ambiental", "Expediente Histórico"])
+
 
 class SolicitudExpediente(BaseModel):
     nombre_huerto: str = Field(..., description="Nombre del huerto")
@@ -14,6 +18,7 @@ class SolicitudExpediente(BaseModel):
     anio_inicio: Optional[int] = Field(2018)
     anio_fin: Optional[int] = Field(2026)
 
+
 @router.post("/generar-completo")
 def generar_expediente_completo(payload: SolicitudExpediente):
     """
@@ -23,11 +28,24 @@ def generar_expediente_completo(payload: SolicitudExpediente):
     try:
         servicio = ExpedienteAmbientalService(payload.dict())
         expediente = servicio.generar_expediente()
-
         return {
             "status": "success",
             "mensaje": "Expediente maestro generado correctamente para procesamiento por Agente",
-            "expediente": expediente
+            "expediente": expediente,
         }
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=str(exc)) from exc
+
+
+@router.post("/imagenes-historicas")
+def generar_imagenes_historicas(solicitud: SolicitudImagenesHistoricas):
+    try:
+        return ServicioExpediente(
+            geometry=solicitud.geometry,
+            mes_inicio=solicitud.mes_inicio,
+            mes_fin=solicitud.mes_fin,
+        ).generar(solicitud.anios)
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=f"Error generando expediente: {exc}") from exc

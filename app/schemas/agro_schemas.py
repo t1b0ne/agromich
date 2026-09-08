@@ -37,6 +37,15 @@ class SolicitudPredio(BaseModel):
     fecha_inicio_auditoria: Optional[str] = Field("2018-01-01", description="Fecha histórica para comparar")
     fecha_fin_auditoria: Optional[str] = Field("2026-01-01", description="Fecha actual de análisis")
 
+
+class SolicitudImagenesHistoricas(BaseModel):
+    geometry: Dict[str, Any] = Field(..., description="Geometría GeoJSON del polígono")
+    anios: list[int] = Field(..., min_length=1, max_length=20, description="Años a consultar")
+    cultivo: str = Field(..., description="Cultivo del predio")
+    visualizacion: str = Field(default="rgb", description="Tipo de visualización")
+    mes_inicio: int = Field(default=1, ge=1, le=12)
+    mes_fin: int = Field(default=4, ge=1, le=12)
+
 class EmailSchema(BaseModel):
     email: EmailStr
     name: str
