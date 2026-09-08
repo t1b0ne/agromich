@@ -33,7 +33,8 @@ except Exception as e:
 
 
 class ProcesadorSatelitalModular:
-    def __init__(self, geojson_geometry: dict = None, fecha_inicio: str = "2025-01-01", fecha_fin: str = "2025-12-31", estado: str = None, municipio: str = None):
+    def __init__(self, geojson_geometry: dict = None, cultivo: str = "aguacate", fecha_inicio: str = "2025-01-01", fecha_fin: str = "2026-12-31"):
+        self.cultivo_declarado = cultivo.lower()
         self.fecha_inicio = fecha_inicio
         self.fecha_fin = fecha_fin
         
@@ -43,42 +44,58 @@ class ProcesadorSatelitalModular:
                 self.ee_geom = ee.Geometry(self.geom_data["geometry"])
             else:
                 self.ee_geom = ee.Geometry(self.geom_data)
-                
-        elif estado and municipio:
-            municipios_col = ee.FeatureCollection('FAO/GAUL/2015/level2')
-            self.ee_geom = municipios_col \
-                .filter(ee.Filter.eq('ADM1_NAME', estado)) \
-                .filter(ee.Filter.eq('ADM2_NAME', municipio)) \
-                .geometry()
         else:
             # Polígono por defecto en Uruapan, Michoacán
             self.ee_geom = ee.Geometry.Polygon([[
-                [-102.065, 19.412],
-                [-102.055, 19.412],
-                [-102.055, 19.422],
-                [-102.065, 19.422],
+                [-102.065, 19.412], [-102.055, 19.412],
+                [-102.055, 19.422], [-102.065, 19.422],
                 [-102.065, 19.412]
             ]])
 
     def _obtener_imagen_compuesta(self, fecha_ini: str, fecha_fin: str):
-        s2 = ee.ImageCollection('COPERNICUS/S2_SR') \
+        s2 = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED') \
             .filterBounds(self.ee_geom) \
             .filterDate(fecha_ini, fecha_fin) \
             .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 20)) \
-            .select(['B8', 'B4']) # Bandas de Infrarrojo Cercano y Rojo para NDVI
+            .select(['B8', 'B4', 'B3', 'B2'])
         return s2.median().clip(self.ee_geom)
 
     def calcular_ndvi(self, imagen):
         return imagen.normalizedDifference(['B8', 'B4']).rename('NDVI')
+
+    def analizar_patron_geometrico(self, imagen):
+        """
+        Analiza la textura espacial para diferenciar patrones de macrotúneles (berries) 
+        vs dosel arbóreo disperso (aguacate).
+        """
+        try:
+            brillo = imagen.select('B2').rename('brillo')
+            textura = brillo.neighborhoodReduce(
+                reducer=ee.Reducer.stdDev(),
+                kernel=ee.Kernel.circle(10, 'meters')
+            ).rename('textura')
+
+            stats_textura = textura.reduceRegion(
+                reducer=ee.Reducer.mean(),
+                geometry=self.ee_geom,
+                scale=10,
+                maxPixels=1e9
+            ).getInfo()
+
+            valor_textura = stats_textura.get('textura', 0) or 0
+            patron_detectado = "berries" if valor_textura < 150 else "aguacate"
+            
+            return patron_detectado, round(valor_textura, 2)
+        except Exception:
+            return "desconocido", 0.0
 
     def verificar_alerta_deforestacion_global(self):
         """
         Cruza el polígono con el dataset histórico global de pérdida forestal (Hansen/UMD)
         """
         try:
-            gfc = ee.Image('UMD/hansen/global_forest_change_2023_v1_11')
+            gfc = ee.Image('UMD/hansen/global_forest_change_2025_v1_13')
             loss = gfc.select('loss')
-            
             loss_en_predio = loss.clip(self.ee_geom).reduceRegion(
                 reducer=ee.Reducer.sum(),
                 geometry=self.ee_geom,
@@ -91,73 +108,150 @@ class ProcesadorSatelitalModular:
         except Exception:
             return False
 
+    def obtener_auditoria_multivariable(self):
+        """
+        Extrae metadatos de Sentinel, EVI, topografía (NASA NASADEM) y evapotranspiración (MODIS).
+        """
+        try:
+            anio = self.fecha_fin.split('-')[0]
+            
+            s2_collection = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED') \
+                .filterBounds(self.ee_geom) \
+                .filterDate(f"{anio}-01-01", f"{anio}-12-31") \
+                .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 20))
+            
+            primer_imagen = s2_collection.first()
+            metadatos_s2 = {
+                "id_escena": primer_imagen.get('SPACECRAFT_NAME').getInfo() if primer_imagen else "Desconocido",
+                "fecha_adquisicion": ee.Date(primer_imagen.get('system:time_start')).format('YYYY-MM-dd').getInfo() if primer_imagen else None,
+                "nubes_porcentaje": primer_imagen.get('CLOUDY_PIXEL_PERCENTAGE').getInfo() if primer_imagen else 0.0
+            }
+
+            img_s2 = s2_collection.median().clip(self.ee_geom)
+            
+            # EVI (Enhanced Vegetation Index)
+            evi = img_s2.expression(
+                '2.5 * ((NIR - RED) / (NIR + 6 * RED - 7.5 * BLUE + 1))',
+                {
+                    'NIR': img_s2.select('B8'),
+                    'RED': img_s2.select('B4'),
+                    'BLUE': img_s2.select('B2')
+                }
+            ).rename('EVI')
+
+            stats_evi = evi.reduceRegion(ee.Reducer.mean(), self.ee_geom, scale=10, maxPixels=1e9).getInfo()
+            promedio_evi = stats_evi.get('EVI', 0) or 0
+
+            # Elevación y Pendiente (NASA NASADEM)
+            dem = ee.Image('NASA/NASADEM_HGT/001').select('elevation')
+            elevacion_clip = dem.clip(self.ee_geom)
+            pendiente = ee.Terrain.slope(elevacion_clip)
+            
+            stats_terreno = ee.Image.cat([elevacion_clip, pendiente]).reduceRegion(
+                reducer=ee.Reducer.mean(),
+                geometry=self.ee_geom,
+                scale=30,
+                maxPixels=1e9
+            ).getInfo()
+            
+            elevacion_prom = stats_terreno.get('elevation', 0) or 0
+            pendiente_prom = stats_terreno.get('slope', 0) or 0
+            alerta_pendiente = bool(pendiente_prom > 15.0)
+
+            # Evapotranspiración (MODIS MOD16A2GF)
+            modis_et = ee.ImageCollection('MODIS/061/MOD16A2GF') \
+                .filterBounds(self.ee_geom) \
+                .filterDate(f"{anio}-01-01", f"{anio}-12-31") \
+                .select('ET')
+            
+            evapotranspiracion_anual = 0.0
+            if modis_et.size().getInfo() > 0:
+                et_mean = modis_et.mean().multiply(0.1).clip(self.ee_geom)
+                stats_et = et_mean.reduceRegion(reducer=ee.Reducer.mean(), geometry=self.ee_geom, scale=500, maxPixels=1e9).getInfo()
+                evapotranspiracion_anual = stats_et.get('ET', 0) or 0
+
+            return {
+                "metadatos_sentinel": metadatos_s2,
+                "vegetacion_avanzada": {
+                    "evi_promedio": round(promedio_evi, 4)
+                },
+                "topografia_suelo": {
+                    "elevacion_msnm": round(elevacion_prom, 2),
+                    "pendiente_grados": round(pendiente_prom, 2),
+                    "alerta_pendiente_excesiva": alerta_pendiente
+                },
+                "hidrologia": {
+                    "evapotranspiracion_anual_mm": round(evapotranspiracion_anual, 2)
+                }
+            }
+        except Exception as e:
+            print(f"Error en auditoría multivariable: {e}")
+            return {}
+
     def procesar_para_agente_y_mapa(self):
         try:
             anio_inicio = int(self.fecha_inicio.split('-')[0])
             anio_fin = int(self.fecha_fin.split('-')[0])
             
-            # Obtener imágenes y calcular NDVI histórico vs actual
-            img_pasada = self._obtener_imagen_compuesta(f"{anio_inicio}-01-01", f"{anio_inicio}-12-31")
             img_actual = self._obtener_imagen_compuesta(f"{anio_fin}-01-01", f"{anio_fin}-12-31")
+            img_pasada = self._obtener_imagen_compuesta(f"{anio_inicio}-01-01", f"{anio_inicio}-12-31")
             
             ndvi_pasado = self.calcular_ndvi(img_pasada)
             ndvi_actual = self.calcular_ndvi(img_actual)
-            
             diferencia_ndvi = ndvi_actual.subtract(ndvi_pasado).rename('diferencia_ndvi')
             
-            stats_pasado = ndvi_pasado.reduceRegion(ee.Reducer.mean(), self.ee_geom, scale=10, maxPixels=1e9).getInfo()
-            stats_actual = ndvi_actual.reduceRegion(ee.Reducer.mean(), self.ee_geom, scale=10, maxPixels=1e9).getInfo()
+            # Validación geométrica y de cultivo
+            patron_espacial, score_textura = self.analizar_patron_geometrico(img_actual)
             
-            promedio_pasado = stats_pasado.get('NDVI', 0) or 0
-            promedio_actual = stats_actual.get('NDVI', 0) or 0
-            diferencia = promedio_actual - promedio_pasado
+            alerta_incongruencia = False
+            mensaje_incongruencia = "El patrón geométrico e infraestructura coinciden con el cultivo declarado."
             
-            # Validación institucional cruzada
-            historial_deforestacion = self.verificar_alerta_deforestacion_global()
+            if "aguacate" in self.cultivo_declarado and patron_espacial == "berries":
+                alerta_incongruencia = True
+                mensaje_incongruencia = "⚠️ Incongruencia detectada: Declaró 'Aguacate', pero la firma geométrica muestra patrones de macrotúneles (Berries)."
+            elif "berry" in self.cultivo_declarado and patron_espacial == "aguacate":
+                alerta_incongruencia = True
+                mensaje_incongruencia = "⚠️ Incongruencia detectada: Declaró 'Berries', pero la textura espacial muestra dosel arbóreo (Aguacate)."
 
-            # Lógica de clasificación para el Agente
-            if historial_deforestacion and diferencia < -0.10:
+            # Métricas de NDVI y multivariables
+            stats_p = ndvi_pasado.reduceRegion(ee.Reducer.mean(), self.ee_geom, scale=10, maxPixels=1e9).getInfo()
+            stats_a = ndvi_actual.reduceRegion(ee.Reducer.mean(), self.ee_geom, scale=10, maxPixels=1e9).getInfo()
+            prom_p = stats_p.get('NDVI', 0) or 0
+            prom_a = stats_a.get('NDVI', 0) or 0
+            diferencia = prom_a - prom_p
+
+            historial_deforestacion = self.verificar_alerta_deforestacion_global()
+            datos_multivariables = self.obtener_auditoria_multivariable()
+
+            if alerta_incongruencia:
+                clasificacion = "Requiere revisión por incongruencia"
+            elif historial_deforestacion and diferencia < -0.10:
                 clasificacion = "Incumplimiento Crítico"
-                detalle_alerta = "Alerta institucional: Se detectó pérdida histórica de cobertura forestal cruzada con una disminución severa de NDVI. Posible cambio de uso de suelo ilegal."
             elif diferencia < -0.15:
                 clasificacion = "Posible incumplimiento"
-                detalle_alerta = "Se detectó una reducción severa en el índice de vegetación (NDVI), lo que sugiere posible pérdida de cobertura vegetal."
-            elif diferencia < -0.05:
-                clasificacion = "Requiere revisión"
-                detalle_alerta = "Se observa una leve disminución de vegetación que amerita inspección visual."
             else:
                 clasificacion = "Cumple"
-                detalle_alerta = "La cobertura vegetal se mantiene estable o muestra mejoras sin alertas de deforestación."
 
-            # Parámetros visuales para la capa ráster de teselas
-            viz_params = {
-                'min': -0.4,
-                'max': 0.4,
-                'palette': ['red', 'yellow', 'green']
-            }
-            map_id = diferencia_ndvi.getMapId(viz_params)
-            tile_url = map_id['tile_fetcher'].url_format
-
-            # Obtener el centroide en formato [longitud, latitud] para centrar el mapa en el frontend
             centroide = self.ee_geom.centroid().coordinates().getInfo()
 
             return {
-                "tile_url": tile_url,
-                "capa": "diferencia_ndvi",
-                "sistema": "Google Earth Engine / Sentinel-2 + UMD Hansen",
+                "sistema": "Google Earth Engine / Sentinel-2 + NASADEM + MODIS (Datos puros)",
                 "centro_sugerido": centroide,
                 "zoom_sugerido": 15,
                 "estado_evaluacion": clasificacion,
                 "metricas": {
-                    "ndvi_historico": round(promedio_pasado, 4),
-                    "ndvi_actual": round(promedio_actual, 4),
+                    "cultivo_declarado": self.cultivo_declarado,
+                    "cultivo_inferido": patron_espacial,
+                    "incongruencia_detectada": alerta_incongruencia,
+                    "ndvi_historico": round(prom_p, 4),
+                    "ndvi_actual": round(prom_a, 4),
                     "delta_cambio": round(diferencia, 4),
                     "alerta_deforestacion_historica": historial_deforestacion,
-                    "periodo_comparacion": f"{anio_inicio} vs {anio_fin}"
+                    **datos_multivariables
                 },
-                "diagnostico_sintetizado": detalle_alerta,
-                "recomendacion_accion": "Bloquear certificación y notificar a la autoridad ambiental" if "Incumplimiento" in clasificacion else "Aprobar predio sin restricciones"
+                "diagnostico_sintetizado": mensaje_incongruencia,
+                "recomendacion_accion": "Verificar en campo y bloquear certificación temporalmente" if clasificacion != "Cumple" else "Aprobar predio sin restricciones"
             }
             
         except Exception as e:
-            raise Exception(f"Error en GEE avanzado: {str(e)}")
+            raise Exception(f"Error en procesamiento de datos satelitales: {str(e)}")

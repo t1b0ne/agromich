@@ -1,5 +1,5 @@
 from typing import Optional, Dict, Any
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, EmailStr
 
 class SolicitudSatelital(BaseModel):
     estado: str = Field(..., description="Estado, ej. Michoacán")
@@ -36,3 +36,9 @@ class SolicitudPredio(BaseModel):
     geojson: Dict[str, Any] = Field(..., description="Objeto GeoJSON del terreno (Polygon o Feature)")
     fecha_inicio_auditoria: Optional[str] = Field("2018-01-01", description="Fecha histórica para comparar")
     fecha_fin_auditoria: Optional[str] = Field("2026-01-01", description="Fecha actual de análisis")
+
+class EmailSchema(BaseModel):
+    email: EmailStr
+    name: str
+    subject: str
+    html_content: str

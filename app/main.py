@@ -8,7 +8,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 # Importar los routers modulares (¡Añadimos predios aquí!)
-from app.routers import satelite, suelo, clima, sanidad, predios
+from app.routers import satelite, suelo, clima, sanidad, predios, cultivos, email, expediente
 
 app = FastAPI(
     title="AgroMich API - Inteligencia Territorial y Agronómica",
@@ -29,7 +29,10 @@ app.include_router(satelite.router)
 app.include_router(suelo.router)
 app.include_router(clima.router)
 app.include_router(sanidad.router)
-app.include_router(predios.router)  # <-- ¡Registramos el nuevo router de predios y análisis inteligente!
+app.include_router(predios.router)
+app.include_router(cultivos.router)
+app.include_router(email.router)
+app.include_router(expediente.router)  # Añadido el router de expediente
 
 @app.get("/", tags=["Salud del Sistema"])
 def read_root():
