@@ -1,11 +1,11 @@
 from datetime import datetime
 from typing import Any, Dict, Iterable
-
+from concurrent.futures import ThreadPoolExecutor
 import ee
 
 
 class ServicioExpediente:
-    """Genera una serie de imágenes históricas para un polígono en Earth Engine."""
+    """Genera una serie de imágenes históricas para un polígono en Earth Engine (Optimizado con Multihilos)."""
 
     def __init__(self, geometry: Dict[str, Any], mes_inicio: int, mes_fin: int):
         if geometry.get("type") != "Polygon":
@@ -79,37 +79,48 @@ class ServicioExpediente:
                 max(p[0] for p in puntos), max(p[1] for p in puntos)]
 
     def _imagen_anual(self, anio: int) -> Dict[str, Any]:
-        inicio, fin = self._rango_anual(anio)
-        fuente = "Sentinel-2"
-        coleccion = self._coleccion_sentinel(inicio, fin) if anio >= 2017 else None
-        if coleccion is None or coleccion.size().getInfo() == 0:
-            coleccion, fuente = self._coleccion_landsat(anio, inicio, fin)
-        if coleccion.size().getInfo() == 0:
-            return {"anio": anio, "disponible": False,
-                    "motivo": "Sin escena con nubosidad menor a 20%"}
+        try:
+            inicio, fin = self._rango_anual(anio)
+            fuente = "Sentinel-2"
+            coleccion = self._coleccion_sentinel(inicio, fin) if anio >= 2017 else None
+            
+            if coleccion is None or coleccion.size().getInfo() == 0:
+                coleccion, fuente = self._coleccion_landsat(anio, inicio, fin)
+            if coleccion.size().getInfo() == 0:
+                return {"anio": anio, "disponible": False,
+                        "motivo": "Sin escena con nubosidad menor al 20%"}
 
-        propiedad_nubes = "CLOUDY_PIXEL_PERCENTAGE" if fuente == "Sentinel-2" else "CLOUD_COVER"
-        escena = coleccion.sort(propiedad_nubes).first()
-        propiedades = escena.toDictionary(["system:time_start", propiedad_nubes]).getInfo()
-        compuesto = coleccion.median().clip(self.geometry)
-        rgb = compuesto.visualize(bands=["red", "green", "blue"], min=0.02, max=0.35, gamma=1.1)
-        mapa = rgb.getMapId()
-        fecha_ms = propiedades.get("system:time_start")
-        fecha = datetime.utcfromtimestamp(fecha_ms / 1000).strftime("%Y-%m-%d") if fecha_ms else None
-        ndvi = compuesto.normalizedDifference(["nir", "red"]).rename("NDVI")
-        promedio = ndvi.reduceRegion(ee.Reducer.mean(), self.geometry,
-                                     scale=10 if fuente == "Sentinel-2" else 30,
-                                     maxPixels=1e9).getInfo().get("NDVI")
-        return {
-            "anio": anio, "fuente": fuente, "fecha_escena": fecha,
-            "nubosidad_porcentaje": propiedades.get(propiedad_nubes),
-            "thumbnail_url": rgb.getThumbURL({"region": self.geometry, "dimensions": 512, "format": "png"}),
-            "tile_url_template": mapa["tile_fetcher"].url_format,
-            "bounds": self._bounds(self.geometry_geojson),
-            "ndvi_promedio": round(float(promedio), 4) if promedio is not None else None,
-        }
+            propiedad_nubes = "CLOUDY_PIXEL_PERCENTAGE" if fuente == "Sentinel-2" else "CLOUD_COVER"
+            escena = coleccion.sort(propiedad_nubes).first()
+            propiedades = escena.toDictionary(["system:time_start", propiedad_nubes]).getInfo()
+            compuesto = coleccion.median().clip(self.geometry)
+            rgb = compuesto.visualize(bands=["red", "green", "blue"], min=0.02, max=0.35, gamma=1.1)
+            mapa = rgb.getMapId()
+            fecha_ms = propiedades.get("system:time_start")
+            fecha = datetime.utcfromtimestamp(fecha_ms / 1000).strftime("%Y-%m-%d") if fecha_ms else None
+            ndvi = compuesto.normalizedDifference(["nir", "red"]).rename("NDVI")
+            promedio = ndvi.reduceRegion(ee.Reducer.mean(), self.geometry,
+                                         scale=10 if fuente == "Sentinel-2" else 30,
+                                         maxPixels=1e9).getInfo().get("NDVI")
+            return {
+                "anio": anio, "fuente": fuente, "fecha_escena": fecha,
+                "nubosidad_porcentaje": propiedades.get(propiedad_nubes),
+                "thumbnail_url": rgb.getThumbURL({"region": self.geometry, "dimensions": 512, "format": "png"}),
+                "tile_url_template": mapa["tile_fetcher"].url_format,
+                "bounds": self._bounds(self.geometry_geojson),
+                "ndvi_promedio": round(float(promedio), 4) if promedio is not None else None,
+            }
+        except Exception as e:
+            return {"anio": anio, "disponible": False, "motivo": f"Error procesando año: {str(e)}"}
 
     def generar(self, anios: list[int]) -> Dict[str, Any]:
-        return {"status": "success", "mensaje": "Serie histórica generada",
-                "geometry": self.geometry_geojson,
-                "imagenes": [self._imagen_anual(anio) for anio in anios]}
+        # 🚀 Procesamiento concurrente de los años en paralelo
+        with ThreadPoolExecutor(max_workers=5) as executor:
+            imagenes = list(executor.map(self._imagen_anual, anios))
+            
+        return {
+            "status": "success", 
+            "mensaje": "Serie histórica generada en paralelo",
+            "geometry": self.geometry_geojson,
+            "imagenes": imagenes
+        }

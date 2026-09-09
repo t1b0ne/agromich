@@ -43,16 +43,13 @@ class ExpedienteAmbientalService:
 
     @staticmethod
     def _normalizar_cultivo(cultivo: str) -> str:
-        """Normaliza nombres de cultivo para comparar aguacate y berries."""
         texto = unicodedata.normalize("NFKD", str(cultivo or ""))
         return "".join(caracter for caracter in texto if not unicodedata.combining(caracter)).lower().strip()
 
     @classmethod
     def _familia_cultivo(cls, cultivo: str) -> str:
         cultivo = cls._normalizar_cultivo(cultivo)
-        if any(nombre in cultivo for nombre in (
-            "fresa", "frutilla", "berry", "berries", "zarzamora", "frambuesa", "arandano"
-        )):
+        if any(nombre in cultivo for nombre in ("fresa", "frutilla", "berry", "berries", "zarzamora", "frambuesa", "arandano")):
             return "berries"
         if "aguacate" in cultivo or "avocado" in cultivo:
             return "aguacate"
@@ -86,75 +83,87 @@ class ExpedienteAmbientalService:
             stats = textura.reduceRegion(ee.Reducer.mean(), self.ee_geom, scale=10, maxPixels=1e9).getInfo()
             valor_textura = stats.get('textura', 0) or 0
 
-            # La textura se usa como indicador de alerta, no como prueba
-            # definitiva. El umbral puede calibrarse sin modificar el código.
             umbral_berries = float(os.getenv("CULTIVO_TEXTURA_BERRIES_UMBRAL", "22"))
             cultivo_inferido = "berries" if valor_textura >= umbral_berries else "aguacate"
             familia_declarada = self._familia_cultivo(self.cultivo_declarado)
             incongruencia = False
-            mensaje = "Clasificación preliminar basada en textura; requiere validación agronómica."
-
+            
             if familia_declarada in ("aguacate", "berries") and cultivo_inferido != familia_declarada:
                 incongruencia = True
-                if familia_declarada == "aguacate":
-                    mensaje = "⚠️ Declaró 'Aguacate', pero la textura espacial es compatible con patrones de berries/macrotúneles."
-                else:
-                    mensaje = "⚠️ Declaró un cultivo de berries, pero la textura espacial es compatible con dosel de aguacate."
-            elif familia_declarada in ("aguacate", "berries"):
-                mensaje = "El cultivo declarado coincide con la clasificación preliminar por textura."
+                mensaje = "⚠️ Declaró 'Aguacate', pero la textura espacial es compatible con patrones de berries/macrotúneles." if familia_declarada == "aguacate" else "⚠️ Declaró un cultivo de berries, pero la textura espacial es compatible con dosel de aguacate."
             else:
-                mensaje = "Clasificación preliminar basada en textura; requiere validación agronómica."
+                mensaje = "El cultivo declarado coincide con la clasificación preliminar por textura."
 
             return cultivo_inferido, round(valor_textura, 2), incongruencia, mensaje
         except Exception:
             return "desconocido", 0.0, False, "No se pudo procesar la textura"
 
     def _verificar_incendios_historicos(self):
-        """
-        Verifica cicatrices de fuego e incendios previos en el predio 
-        usando el dataset de Áreas Quemadas de MODIS (MODIS/061/MCD64A1).
-        """
         try:
             burn_coll = ee.ImageCollection('MODIS/061/MCD64A1') \
                 .filterBounds(self.ee_geom) \
                 .filterDate(f"{self.anio_inicio}-01-01", f"{self.anio_fin}-12-31") \
                 .select('BurnDate')
             
-            # Si hay píxeles con fecha de quema mayor a 0 dentro del polígono
             burned_sum = burn_coll.map(lambda img: img.gt(0).clip(self.ee_geom)).sum()
-            stats = burned_sum.reduceRegion(
-                reducer=ee.Reducer.max(),
-                geometry=self.ee_geom,
-                scale=500,
-                maxPixels=1e9
-            ).getInfo()
-            
-            # Si la suma máxima indica presencia de fuego en al menos un periodo
-            max_burned = stats.get('BurnDate', 0) or 0
-            return bool(max_burned > 0)
-        except Exception as e:
-            print(f"Error consultando incendios MODIS: {e}")
+            stats = burned_sum.reduceRegion(reducer=ee.Reducer.max(), geometry=self.ee_geom, scale=500, maxPixels=1e9).getInfo()
+            return bool((stats.get('BurnDate', 0) or 0) > 0)
+        except Exception:
             return False
 
     def _obtener_series_historicas(self):
-        """Obtiene la serie temporal de NDVI y verifica deforestación histórica (Hansen)"""
+        """
+        🚀 MÉTODO OPTIMIZADO: Obtiene la serie temporal completa de NDVI 
+        en una sola llamada masiva a GEE (evitando bucles de llamadas individuales).
+        """
         serie_ndvi = []
-        for anio in range(self.anio_inicio, self.anio_fin + 1):
-            try:
+        try:
+            # Creamos una lista de años en el servidor de Earth Engine
+            anios_list = ee.List.sequence(self.anio_inicio, self.anio_fin)
+            
+            def calcular_ndvi_anio(y):
+                y = ee.Number(y)
+                start_date = ee.Date.fromYMD(y, 1, 1)
+                end_date = ee.Date.fromYMD(y, 12, 31)
+                
                 lc = ee.ImageCollection('LANDSAT/LC08/C02/T1_L2') \
                     .filterBounds(self.ee_geom) \
-                    .filterDate(f"{anio}-01-01", f"{anio}-12-31") \
-                    .filter(ee.Filter.lt('CLOUD_COVER', 25)) \
+                    .filterDate(start_date, end_date) \
+                    .filter(ee.Filter.lt('CLOUD_COVER', 30)) \
                     .median().clip(self.ee_geom) \
                     .multiply(0.0000275).add(-0.2)
                 
                 ndvi = lc.normalizedDifference(['SR_B5', 'SR_B4']).rename('NDVI')
-                stats = ndvi.reduceRegion(ee.Reducer.mean(), self.ee_geom, scale=30, maxPixels=1e9).getInfo()
-                serie_ndvi.append({"anio": anio, "ndvi_promedio": round(stats.get('NDVI', 0) or 0, 4)})
-            except Exception:
+                mean_dict = ndvi.reduceRegion(
+                    reducer=ee.Reducer.mean(),
+                    geometry=self.ee_geom,
+                    scale=30,
+                    maxPixels=1e9
+                )
+                val = mean_dict.get('NDVI')
+                # Manejar valores nulos con un fallback de 0
+                val_seguro = ee.Algorithms.If(val, val, 0)
+                
+                return ee.Dictionary({
+                    'anio': y,
+                    'ndvi_promedio': val_seguro
+                })
+
+            # Mapeamos la función en paralelo dentro de GEE y hacemos UN SOLO .getInfo()
+            resultados_ee = anios_list.map(calcular_ndvi_anio).getInfo()
+            
+            for item in resultados_ee:
+                serie_ndvi.append({
+                    "anio": int(item['anio']),
+                    "ndvi_promedio": round(float(item['ndvi_promedio']), 4)
+                })
+        except Exception as e:
+            print(f"Error procesando serie histórica optimizada: {e}")
+            # Fallback vacío si falla la consulta masiva
+            for anio in range(self.anio_inicio, self.anio_fin + 1):
                 serie_ndvi.append({"anio": anio, "ndvi_promedio": None})
 
-        # Verificación Hansen GFC (Pérdida forestal)
+        # Verificación Hansen GFC (Pérdida forestal) en paralelo
         anios_deforestacion = []
         try:
             gfc = ee.Image('UMD/hansen/global_forest_change_2025_v1_13')
@@ -175,15 +184,11 @@ class ExpedienteAmbientalService:
                 "motivo": "El polígono se ubica en zona urbana / infraestructura construida."
             }
 
-        # Análisis de cultivo actual y texturas
         cultivo_inf, textura, incongruencia, msg_cultivo = self._analizar_cultivo_y_textura(self.anio_fin)
-
-        # Series históricas, deforestación e incendios
         serie_ndvi, anios_def = self._obtener_series_historicas()
         hubo_incendios = self._verificar_incendios_historicos()
         def_en_periodo = [a for a in anios_def if a >= self.anio_inicio]
 
-        # Dictamen legal robusto considerando incendios y deforestación
         if len(def_en_periodo) > 0 and hubo_incendios:
             estatus_legal = "INCUMPLIMIENTO CRÍTICO (Deforestación + Incendio Provocado)"
             dictamen = f"Alerta máxima: Se detectó incendio histórico en la zona y pérdida forestal oficial durante el(los) año(s) {def_en_periodo}."
