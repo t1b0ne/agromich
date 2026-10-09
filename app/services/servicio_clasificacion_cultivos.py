@@ -1,13 +1,14 @@
 import os
 import json
 import ee
+from app.core.gee import get_ee
 from dotenv import load_dotenv
 from google.oauth2.credentials import Credentials
 
 load_dotenv()
 
 try:
-    cred_env = os.getenv("EARTHENGINE_CREDENTIALS")
+    cred_env = None  # La inicializacion se realiza de forma perezosa en get_ee().
     if cred_env:
         creds_dict = json.loads(cred_env)
         credentials = Credentials(
@@ -19,7 +20,7 @@ try:
             scopes=creds_dict.get("scopes")
         )
         ee.Initialize(credentials=credentials, project=creds_dict.get("project", "agromich-507422"))
-    else:
+    elif False:
         ee.Initialize(project="agromich-507422")
 except Exception as e:
     print(f"⚠️ Error al inicializar Earth Engine: {e}")
@@ -27,6 +28,7 @@ except Exception as e:
 
 class ClasificadorCultivosService:
     def __init__(self, geojson_geometry: dict, cultivo_declarado: str = "aguacate", anio: int = 2025):
+        get_ee()
         self.cultivo_declarado = cultivo_declarado.lower()
         self.anio = anio
         

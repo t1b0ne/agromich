@@ -2,13 +2,14 @@ import os
 import json
 import unicodedata
 import ee
+from app.core.gee import get_ee
 from dotenv import load_dotenv
 from google.oauth2.credentials import Credentials
 
 load_dotenv()
 
 try:
-    cred_env = os.getenv("EARTHENGINE_CREDENTIALS")
+    cred_env = None  # La inicializacion se realiza de forma perezosa en get_ee().
     if cred_env:
         creds_dict = json.loads(cred_env)
         credentials = Credentials(
@@ -20,7 +21,7 @@ try:
             scopes=creds_dict.get("scopes")
         )
         ee.Initialize(credentials=credentials, project=creds_dict.get("project", "agromich-507422"))
-    else:
+    elif False:
         ee.Initialize(project="agromich-507422")
 except Exception as e:
     print(f"⚠️ Error al inicializar GEE en Expediente Ambiental: {e}")
@@ -28,6 +29,7 @@ except Exception as e:
 
 class ExpedienteAmbientalService:
     def __init__(self, datos_predio: dict):
+        get_ee()
         self.nombre_huerto = datos_predio.get("nombre_huerto", "Predio sin nombre")
         self.productor = datos_predio.get("productor", "Desconocido")
         self.municipio = datos_predio.get("municipio", "Michoacán")

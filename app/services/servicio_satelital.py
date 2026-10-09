@@ -1,6 +1,7 @@
 import os
 import json
 import ee
+from app.core.gee import get_ee
 from dotenv import load_dotenv
 from google.oauth2.credentials import Credentials
 
@@ -8,7 +9,7 @@ load_dotenv()
 
 # Inicialización segura de Google Earth Engine usando las credenciales del .env
 try:
-    cred_env = os.getenv("EARTHENGINE_CREDENTIALS")
+    cred_env = None  # La inicializacion se realiza de forma perezosa en get_ee().
     
     if cred_env:
         creds_dict = json.loads(cred_env)
@@ -24,7 +25,7 @@ try:
         
         ee.Initialize(credentials=credentials, project=creds_dict.get("project", "agromich-507422"))
         print("✅ Google Earth Engine inicializado exitosamente con credenciales del .env")
-    else:
+    elif False:
         ee.Initialize(project="agromich-507422")
         print("⚠️ Inicializado con proyecto predeterminado (sin credenciales explícitas en .env)")
 
@@ -34,6 +35,7 @@ except Exception as e:
 
 class ProcesadorSatelitalModular:
     def __init__(self, geojson_geometry: dict = None, cultivo: str = "aguacate", fecha_inicio: str = "2025-01-01", fecha_fin: str = "2026-12-31"):
+        get_ee()
         self.cultivo_declarado = cultivo.lower()
         self.fecha_inicio = fecha_inicio
         self.fecha_fin = fecha_fin

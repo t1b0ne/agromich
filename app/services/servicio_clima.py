@@ -1,11 +1,13 @@
 import argparse
 import os
 import json
-import requests
 import unicodedata
 import pandas as pd
 from datetime import datetime, timedelta
 import ee
+from app.core.gee import get_ee
+from app.integrations.nasa_power import NasaPowerClient
+from app.repositories import ReportsRepository
 
 def normalizar_texto(texto):
     if not texto:
@@ -26,9 +28,11 @@ class ServicioClimaticoAgronomicoAvanzado:
         self.project = project
         self.carpeta_salida = os.path.abspath(os.path.join("reports", "clima_avanzado"))
         os.makedirs(self.carpeta_salida, exist_ok=True)
+        self.reportes = ReportsRepository()
+        self.nasa_power = NasaPowerClient()
 
         try:
-            ee.Initialize(project=self.project)
+            get_ee()
             print(" [✓] Google Earth Engine inicializado correctamente.")
         except Exception as e:
             print(" [!] Error al inicializar Earth Engine.")
@@ -70,24 +74,9 @@ class ServicioClimaticoAgronomicoAvanzado:
         self._validar_y_ajustar_fechas()
         f_ini_str, f_fin_str = self.fecha_inicio.replace("-", ""), self.fecha_fin.replace("-", "")
 
-        url = "https://power.larc.nasa.gov/api/temporal/daily/point"
-        params = {
-            "parameters": "T2M,T2M_MAX,T2M_MIN,PRECTOTCORR,ALLSKY_SFC_SW_DWN,RH2M,EVPTRNS,WS2M,T2MDEW",
-            "community": "AG",
-            "longitude": self.lon,
-            "latitude": self.lat,
-            "start": f_ini_str,
-            "end": f_fin_str,
-            "format": "JSON"
-        }
-
         try:
-            res = requests.get(url, params=params, timeout=30)
-            if res.status_code != 200:
-                print("\n [!] Error NASA POWER:", res.text)
-                return None
-
-            data = res.json().get("properties", {}).get("parameter", {})
+            response = self.nasa_power.daily_agronomic_data(self.lat, self.lon, f_ini_str, f_fin_str)
+            data = response.get("properties", {}).get("parameter", {})
             registros = []
             fechas = sorted(list(data.get("T2M", {}).keys()))
 
@@ -168,10 +157,8 @@ class ServicioClimaticoAgronomicoAvanzado:
         ruta_json = os.path.join(self.carpeta_salida, f"agronomo_{nombre_archivo}.json")
         ruta_csv = os.path.join(self.carpeta_salida, f"agronomo_{nombre_archivo}.csv")
 
-        with open(ruta_json, 'w', encoding='utf-8') as f:
-            json.dump(resumen, f, ensure_ascii=False, indent=4)
-
-        df.to_csv(ruta_csv, index=False, encoding='utf-8-sig')
+        self.reportes.write_json(ruta_json, resumen)
+        self.reportes.write_dataframe(ruta_csv, df)
 
         print("\n" + "=" * 70)
         print(f" [✓] INFORME AGRONÓMICO COMPLETO GENERADO ({self.nombre_oficial.upper()})")

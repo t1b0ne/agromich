@@ -2,12 +2,14 @@ from datetime import datetime
 from typing import Any, Dict, Iterable
 from concurrent.futures import ThreadPoolExecutor
 import ee
+from app.core.gee import get_ee
 
 
 class ServicioExpediente:
     """Genera una serie de imágenes históricas para un polígono en Earth Engine (Optimizado con Multihilos)."""
 
     def __init__(self, geometry: Dict[str, Any], mes_inicio: int, mes_fin: int):
+        get_ee()
         if geometry.get("type") != "Polygon":
             raise ValueError("geometry debe ser un GeoJSON Polygon")
         if mes_inicio > mes_fin:

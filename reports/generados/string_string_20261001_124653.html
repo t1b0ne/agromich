@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang='es'>
+<head>
+    <meta charset='utf-8'>
+    <title>string</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; color: #1e293b; background: #f8fafc; margin: 0; padding: 20px; line-height: 1.4; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.04); }
+        h1 { color: #065f46; font-size: 22px; margin-bottom: 2px; }
+        .meta { color: #64748b; font-size: 11px; margin-bottom: 6px; }
+        .badge { display: inline-block; background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; padding: 4px 10px; border-radius: 6px; font-weight: 600; font-size: 12px; margin-bottom: 15px; }
+        table { width: 100%; border-collapse: collapse; margin: 5px 0; font-size: 11px; }
+        th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid #e2e8f0; }
+        .font-semibold { font-weight: 600; color: #475569; width: 38%; }
+        .report-card { border: 1px solid #e2e8f0; border-radius: 6px; margin-bottom: 15px; overflow: hidden; background: #fff; }
+        .card-header { background: #f8fafc; padding: 6px 10px; border-bottom: 1px solid #e2e8f0; font-size: 11px; font-weight: 600; color: #334155; }
+        .card-body { padding: 10px; }
+        .chart-container { position: relative; height: 200px; width: 100%; margin: 15px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>string</h1>
+        <p class='meta'>Reporte AgroMich • 2026-10-01 12:46</p>
+        <div class="badge">📍 Estado: string | Municipio: string</div>
+
+        <div class="chart-container">
+            <canvas id="statChart"></canvas>
+        </div>
+
+        
+            <section style="margin-bottom: 25px;">
+                <h2 style="color: #065f46; font-size: 16px; border-bottom: 2px solid #bbf7d0; padding-bottom: 4px; margin-top: 20px;">
+                    Clima
+                </h2>
+                
+                <article class="report-card">
+                    <div class="card-header"><h4>📁 Fuente: clima_avanzado/agronomo_maravatio.json</h4></div>
+                    <div class="card-body"><table><tbody><tr><td class='font-semibold'>ubicacion</td><td>None</td></tr><tr><td class='font-semibold'>periodo</td><td><table style='margin:0;'><tr><td style='color:#64748b;'>inicio</td><td>2024-01-01</td></tr><tr><td style='color:#64748b;'>fin</td><td>2026-03-31</td></tr></table></td></tr><tr><td class='font-semibold'>balance_hidrico</td><td><table style='margin:0;'><tr><td style='color:#64748b;'>precipitacion_acumulada_mm</td><td>1788.02</td></tr><tr><td style='color:#64748b;'>evapotranspiracion_acumulada_mm</td><td>629.89</td></tr><tr><td style='color:#64748b;'>balance_neto_mm</td><td>1158.13</td></tr></table></td></tr><tr><td class='font-semibold'>agronomia_y_fenologia</td><td><table style='margin:0;'><tr><td style='color:#64748b;'>temp_base_gdd_usada_c</td><td>10.0</td></tr><tr><td style='color:#64748b;'>grados_dia_acumulados_gdd</td><td>6159.07</td></tr><tr><td style='color:#64748b;'>dias_riesgo_helada</td><td>1</td></tr><tr><td style='color:#64748b;'>dias_estres_termico_calor</td><td>61</td></tr><tr><td style='color:#64748b;'>dias_aptos_fumigacion</td><td>817</td></tr><tr><td style='color:#64748b;'>viento_promedio_kmh</td><td>4.87</td></tr></table></td></tr><tr><td class='font-semibold'>serie_diaria</td><td>None</td></tr></tbody></table></div>
+                </article>
+                
+            </section>
+            
+            <section style="margin-bottom: 25px;">
+                <h2 style="color: #065f46; font-size: 16px; border-bottom: 2px solid #bbf7d0; padding-bottom: 4px; margin-top: 20px;">
+                    Suelo
+                </h2>
+                
+                <article class="report-card">
+                    <div class="card-header"><h4>📁 Fuente: suelo_y_socioeconomico/siap_michoacan_municipio_resumen_cultivos.json</h4></div>
+                    <div class="card-body"><table><tbody><tr><td class='font-semibold'>metadata</td><td><table style='margin:0;'><tr><td style='color:#64748b;'>fuente</td><td>SIAP - Avance Agrícola</td></tr><tr><td style='color:#64748b;'>estado_consultado</td><td>Michoacan</td></tr><tr><td style='color:#64748b;'>tipo_consulta</td><td>municipio</td></tr><tr><td style='color:#64748b;'>ciclo</td><td>Ciclicos - Perennes</td></tr><tr><td style='color:#64748b;'>modalidad</td><td>Riego + Temporal</td></tr><tr><td style='color:#64748b;'>cultivo</td><td>Resumen cultivos</td></tr><tr><td style='color:#64748b;'>metodo_extraccion</td><td>HTML DOM Scraper Directo (Headless)</td></tr><tr><td style='color:#64748b;'>fecha_extraccion</td><td>2026-09-18 10:34:40</td></tr><tr><td style='color:#64748b;'>total_registros</td><td>0</td></tr></table></td></tr><tr><td class='font-semibold'>datos</td><td>None</td></tr></tbody></table></div>
+                </article>
+                
+            </section>
+            
+            <section style="margin-bottom: 25px;">
+                <h2 style="color: #065f46; font-size: 16px; border-bottom: 2px solid #bbf7d0; padding-bottom: 4px; margin-top: 20px;">
+                    Sanidad
+                </h2>
+                
+                <article class="report-card">
+                    <div class="card-header"><h4>📁 Fuente: sanidad_y_programas/sanidad_y_sader_maravatio_string.json</h4></div>
+                    <div class="card-body"><table><tbody><tr><td class='font-semibold'>fecha_consulta</td><td>2026-09-15 08:21:31</td></tr><tr><td class='font-semibold'>parametros_busqueda</td><td><table style='margin:0;'><tr><td style='color:#64748b;'>estado</td><td>Michoacan de Ocampo</td></tr><tr><td style='color:#64748b;'>municipio</td><td>maravatio</td></tr><tr><td style='color:#64748b;'>cultivo</td><td>String</td></tr></table></td></tr><tr><td class='font-semibold'>cesavemich_sanidad_vegetal</td><td><table style='margin:0;'><tr><td style='color:#64748b;'>total_alertas</td><td>3</td></tr><tr><td style='color:#64748b;'>alertas_y_estatus</td><td>None</td></tr></table></td></tr><tr><td class='font-semibold'>sader_michoacan_programas</td><td><table style='margin:0;'><tr><td style='color:#64748b;'>total_programas</td><td>3</td></tr><tr><td style='color:#64748b;'>programas_activos</td><td>None</td></tr></table></td></tr></tbody></table></div>
+                </article>
+                
+            </section>
+            
+            <section style="margin-bottom: 25px;">
+                <h2 style="color: #065f46; font-size: 16px; border-bottom: 2px solid #bbf7d0; padding-bottom: 4px; margin-top: 20px;">
+                    Region Y Solicitud
+                </h2>
+                
+                <article class="report-card">
+                    <div class="card-header"><h4>📁 Fuente: delimitacion_territorial</h4></div>
+                    <div class="card-body"><table><tbody><tr><td class='font-semibold'>estado</td><td>string</td></tr><tr><td class='font-semibold'>municipio</td><td>string</td></tr><tr><td class='font-semibold'>additionalProp1</td><td><table style='margin:0;'></table></td></tr></tbody></table></div>
+                </article>
+                
+            </section>
+            
+    </div>
+
+    <script>
+        const ctx = document.getElementById('statChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Métrica 1', 'Métrica 2', 'Métrica 3', 'Métrica 4', 'Métrica 5', 'Métrica 6'],
+                datasets: [{
+                    label: 'Comportamiento Regional Normalizado',
+                    data: [10, 15, 22, 18, 25, 30],
+                    backgroundColor: 'rgba(5, 150, 105, 0.6)',
+                    borderColor: '#059669',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'top', labels: { font: { size: 10 } } } }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,34 +1,32 @@
-from fastapi import APIRouter, HTTPException
+import logging
+
+from fastapi import APIRouter, Depends, HTTPException
+
+from app.core.security import require_api_key
+from app.schemas.predios import SolicitudPredio
 from app.services.servicio_satelital import ProcesadorSatelitalModular
 
-router = APIRouter()
+logger = logging.getLogger(__name__)
+router = APIRouter(prefix="/api/v1/predios", tags=["Predios y Auditorias"])
 
-@router.post("/auditar-predio-inteligente")
-def auditar_predio(payload: dict):
+
+@router.post("/auditar", dependencies=[Depends(require_api_key)], summary="Audita un predio mediante datos satelitales")
+def auditar_predio(payload: SolicitudPredio):
     try:
-        # Extraer datos del request JSON
-        geojson_geom = payload.get("geometry") or payload.get("geojson")
-        cultivo = payload.get("cultivo", "aguacate")
-        fecha_inicio = payload.get("fecha_inicio", "2025-01-01")
-        fecha_fin = payload.get("fecha_fin", "2026-12-31")
-
-        # Instanciar el procesador modular (solo datos)
         procesador = ProcesadorSatelitalModular(
-            geojson_geometry=geojson_geom,
-            cultivo=cultivo,
-            fecha_inicio=fecha_inicio,
-            fecha_fin=fecha_fin
+            geojson_geometry=payload.geojson,
+            cultivo=payload.cultivo,
+            fecha_inicio=payload.fecha_inicio_auditoria.isoformat(),
+            fecha_fin=payload.fecha_fin_auditoria.isoformat(),
         )
-
-        # Ejecutar análisis
-        resultado_analisis = procesador.procesar_para_agente_y_mapa()
-
-        # Retornar la estructura limpia basada estrictamente en datos
         return {
             "status": "success",
-            "mensaje": "Auditoría multivariable completada exitosamente",
-            "data": resultado_analisis
+            "mensaje": "Auditoria multivariable completada",
+            "data": procesador.procesar_para_agente_y_mapa(),
         }
-
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+    except RuntimeError as exc:
+        logger.warning("Servicio satelital no disponible: %s", exc)
+        raise HTTPException(status_code=503, detail="Servicio satelital no disponible") from exc
+    except Exception:
+        logger.exception("Error no controlado en auditoria de predio")
+        raise HTTPException(status_code=502, detail="No fue posible auditar el predio")

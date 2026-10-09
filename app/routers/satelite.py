@@ -1,26 +1,29 @@
-from fastapi import APIRouter, HTTPException
-import traceback
-from app.schemas.agro_schemas import SolicitudSatelital
+import logging
 
-# Importamos directamente para que cualquier fallo interno se revele al instante
+from fastapi import APIRouter, Depends, HTTPException
+
+from app.core.security import require_api_key
+from app.schemas.satelite import SolicitudSatelital
 from app.services.servicio_satelital import ProcesadorSatelitalModular
 
-router = APIRouter(prefix="/api/v1/satelite", tags=["Análisis Satelital"])
+logger = logging.getLogger(__name__)
+router = APIRouter(prefix="/api/v1/satelite", tags=["Analisis Satelital"])
 
-@router.post("/analisis")
+
+@router.post("/analisis", dependencies=[Depends(require_api_key)])
 def analizar_satelite(datos: SolicitudSatelital):
+    """Analiza exclusivamente la geometria proporcionada por el cliente."""
     try:
         procesador = ProcesadorSatelitalModular(
-            estado=datos.estado,
-            municipio=datos.municipio,
-            fecha_inicio=datos.fecha_inicio,
-            fecha_fin=datos.fecha_fin
+            geojson_geometry=datos.geometry,
+            cultivo=datos.cultivo,
+            fecha_inicio=datos.fecha_inicio.isoformat(),
+            fecha_fin=datos.fecha_fin.isoformat(),
         )
-        return procesador.procesar()
-    except Exception as e:
-        # Esto imprimirá la ruta exacta del error en rojo en tu terminal de Uvicorn
-        print("🔥 ERROR CRÍTICO EN EL PROCESADOR SATELITAL:")
-        traceback.print_exc()
-        
-        # Esto te mostrará el mensaje exacto del error en la respuesta HTTP (Swagger)
-        raise HTTPException(status_code=500, detail=f"Error interno: {str(e)}")
+        return procesador.procesar_para_agente_y_mapa()
+    except RuntimeError as exc:
+        logger.warning("Servicio satelital no disponible: %s", exc)
+        raise HTTPException(status_code=503, detail="Servicio satelital no disponible") from exc
+    except Exception:
+        logger.exception("Error no controlado en analisis satelital")
+        raise HTTPException(status_code=502, detail="No fue posible completar el analisis satelital")

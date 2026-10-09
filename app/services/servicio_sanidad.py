@@ -3,6 +3,7 @@ import os
 import json
 import unicodedata
 from datetime import datetime
+from app.repositories import ReportsRepository
 
 def normalizar_texto(texto):
     """Elimina tildes, caracteres especiales y convierte a minúsculas para comparaciones limpias."""
@@ -19,6 +20,7 @@ class ServicioSanidadYProgramasEstatales:
         self.project = project
         self.carpeta_salida = os.path.abspath(os.path.join("reports", "sanidad_y_programas"))
         os.makedirs(self.carpeta_salida, exist_ok=True)
+        self.reportes = ReportsRepository()
 
         # Base de Datos de Alertas y Estatus Fitosanitario (CESAVEMICH)
         self.base_cesavemich = [
@@ -159,8 +161,7 @@ class ServicioSanidadYProgramasEstatales:
         
         ruta_json = os.path.join(self.carpeta_salida, f"sanidad_y_sader_{identificador}.json")
 
-        with open(ruta_json, 'w', encoding='utf-8') as f:
-            json.dump(resumen, f, ensure_ascii=False, indent=4)
+        self.reportes.write_json(ruta_json, resumen)
 
         print("\n" + "="*70)
         print(" [✓] INFORME DE SANIDAD VEGETAL Y APOYOS ESTATALES GENERADO")

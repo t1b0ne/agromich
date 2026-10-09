@@ -1,5 +1,6 @@
-from fastapi import APIRouter, HTTPException
-from app.schemas.agro_schemas import SolicitudSuelo
+from fastapi import APIRouter, Depends, HTTPException
+from app.core.security import require_api_key
+from app.schemas.suelo import SolicitudSuelo
 
 try:
     from app.services.servicio_suelo import ExtractorSIAPDirecto
@@ -8,7 +9,7 @@ except ImportError:
 
 router = APIRouter(prefix="/api/v1/suelo", tags=["Suelo y Socioeconómico"])
 
-@router.post("/analisis")
+@router.post("/analisis", dependencies=[Depends(require_api_key)])
 def analizar_suelo(datos: SolicitudSuelo):
     if not ExtractorSIAPDirecto:
         raise HTTPException(status_code=500, detail="Módulo de Suelo no disponible.")

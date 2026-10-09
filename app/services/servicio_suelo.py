@@ -8,6 +8,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select, WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from app.repositories import ReportsRepository
 
 class ExtractorSIAPDirecto:
     def __init__(self, estado="Michoacán de Ocampo", tipo_consulta="municipio", ciclo="Ciclicos - Perennes", modalidad="Riego + Temporal", cultivo="Resumen cultivos"):
@@ -28,6 +29,7 @@ class ExtractorSIAPDirecto:
         
         self.archivo_json = os.path.join(self.carpeta_salida, nombre_archivo)
         self.url = "https://nube.agricultura.gob.mx/avance_agricola/"
+        self.reportes = ReportsRepository()
 
     def _iniciar_driver(self):
         """Inicializa el navegador Selenium en modo headless."""
@@ -219,8 +221,7 @@ class ExtractorSIAPDirecto:
         }
 
         # Guardar en disco duro dentro de reports/suelo_y_socioeconomico/
-        with open(self.archivo_json, "w", encoding="utf-8") as f:
-            json.dump(resultado, f, ensure_ascii=False, indent=2)
+        self.reportes.write_json(self.archivo_json, resultado)
 
         print(f"\n [✓] ÉXITO: Archivo respaldado en '{self.archivo_json}'")
         print(f"    Total de registros extraídos: {len(datos)}\n")
