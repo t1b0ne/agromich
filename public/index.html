@@ -1,282 +1,194 @@
-<!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<!doctype html>
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgroMich API - Inteligencia Geoespacial y Agrícola</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        function switchView(view) {
-            const homeView = document.getElementById('home-view');
-            const docsView = document.getElementById('docs-view');
-            if (view === 'docs') {
-                homeView.classList.add('hidden');
-                docsView.classList.remove('hidden');
-                window.scrollTo(0, 0);
-            } else {
-                docsView.classList.add('hidden');
-                homeView.classList.remove('hidden');
-                window.scrollTo(0, 0);
-            }
-        }
-    </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Guía técnica y documentación de AgroMich API">
+  <title>AgroMich API · Guía técnica</title>
+  <style>
+    :root { --ink:#172033; --muted:#62708a; --line:#dce4ee; --canvas:#f5f8fb; --card:#fff; --green:#087849; --green-soft:#e8f7ef; --blue:#1769aa; --code:#101827; }
+    * { box-sizing:border-box; } html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--canvas); color:var(--ink); font:15px/1.6 Inter,Segoe UI,Arial,sans-serif; }
+    a { color:var(--blue); text-decoration:none; } a:hover { text-decoration:underline; }
+    header { background:linear-gradient(135deg,#063d2b,#0b7650); color:#fff; padding:64px 24px 72px; }
+    .wrap { max-width:1180px; margin:auto; padding:0 24px; }
+    .badge { display:inline-block; background:#ffffff22; border:1px solid #ffffff44; border-radius:999px; padding:4px 11px; font-size:12px; }
+    h1 { margin:14px 0 8px; font-size:clamp(34px,5vw,58px); letter-spacing:-.04em; line-height:1; }
+    h2 { margin:52px 0 12px; font-size:27px; letter-spacing:-.025em; } h3 { margin:0 0 8px; font-size:18px; }
+    .lead { max-width:760px; font-size:19px; opacity:.92; } .pills { display:flex; flex-wrap:wrap; gap:8px; margin-top:24px; }
+    .pills a { color:#fff; border:1px solid #ffffff55; padding:7px 12px; border-radius:8px; font-size:13px; }
+    .layout { display:grid; grid-template-columns:220px minmax(0,1fr); gap:34px; padding-top:34px; }
+    nav { position:sticky; top:16px; align-self:start; font-size:13px; } nav a { display:block; padding:5px 9px; color:var(--muted); border-left:2px solid transparent; } nav a:hover { border-color:var(--green); color:var(--green); text-decoration:none; }
+    main { min-width:0; padding-bottom:72px; } .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:22px; margin:16px 0; box-shadow:0 2px 9px #16243b08; }
+    .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; } .grid3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+    .tag { display:inline-block; font:600 11px/1 monospace; border-radius:4px; padding:5px 7px; margin-right:5px; background:#e6eff9; color:#135a94; } .post { background:#e8f7ef; color:#087849; } .get { background:#e8effc; color:#2456a5; }
+    .muted { color:var(--muted); } code { background:#eef2f6; padding:1px 5px; border-radius:4px; font-size:.9em; }
+    pre { margin:13px 0 0; padding:15px; overflow:auto; background:var(--code); color:#d9e7f2; border-radius:9px; font:12px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace; position:relative; white-space:pre; }
+    button.copy { position:absolute; top:8px; right:8px; border:1px solid #61708a; color:#e9f2fb; background:#243146; border-radius:5px; font:11px inherit; padding:4px 8px; cursor:pointer; }
+    table { width:100%; border-collapse:collapse; font-size:13px; } th,td { padding:10px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; } th { color:var(--muted); font-size:11px; text-transform:uppercase; }
+    .flow { display:flex; align-items:stretch; gap:8px; flex-wrap:wrap; } .node { flex:1 1 145px; border:1px solid var(--line); border-radius:9px; padding:14px; background:#fff; text-align:center; font-weight:600; } .arrow { align-self:center; color:var(--green); font-size:24px; }
+    .tree { background:#0f1726; color:#d5e4ef; border-radius:10px; padding:18px; overflow:auto; font:13px/1.55 ui-monospace,Consolas,monospace; }
+    .notice { border-left:4px solid var(--green); background:var(--green-soft); padding:12px 15px; border-radius:0 8px 8px 0; }
+    .endpoint { border-left:4px solid var(--green); } .endpoint p { margin:7px 0; }
+    footer { border-top:1px solid var(--line); padding:25px; color:var(--muted); text-align:center; font-size:13px; }
+    @media (max-width:820px) { .layout { display:block; } nav { display:none; } .grid,.grid3 { grid-template-columns:1fr; } header { padding:45px 10px 50px; } .wrap { padding:0 16px; } }
+  </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-emerald-500 selection:text-white">
-
-    <!-- ========================================== -->
-    <!-- VISTA 1: HOME / LANDING PAGE (ESTILO HERO) -->
-    <!-- ========================================== -->
-    <div id="home-view" class="min-h-screen flex flex-col justify-between">
-        
-        <!-- Navbar -->
-        <header class="border-b border-slate-200/60 bg-white/70 backdrop-blur-md sticky top-0 z-50">
-            <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-                <div class="flex items-center space-x-2">
-                    <span class="text-emerald-600 text-xl font-bold">🌱</span>
-                    <span class="font-semibold text-slate-900 tracking-tight text-base">AgroMich <span class="text-emerald-600 font-medium">API</span></span>
-                </div>
-                <div class="flex items-center space-x-6 text-xs md:text-sm font-medium text-slate-600">
-                    <button onclick="switchView('docs')" class="hover:text-slate-900 transition">Documentación</button>
-                    <a href="/docs" target="_blank" class="hover:text-slate-900 transition">Swagger UI ↗</a>
-                    <a href="https://github.com" target="_blank" class="bg-slate-900 text-white px-4 py-2 rounded-full hover:bg-slate-800 transition shadow-sm">GitHub</a>
-                </div>
-            </div>
-        </header>
-
-        <!-- Hero Banner Estilo Referencia (Cielo limpio, tipografía imponente y píldora superior) -->
-        <main class="max-w-7xl mx-auto px-4 py-8 md:py-12 w-full space-y-20">
-            
-            <div class="relative overflow-hidden rounded-[2.5rem] shadow-xl border border-white/40 bg-slate-900 min-h-[520px] md:min-h-[600px] flex flex-col items-center justify-center text-center p-8">
-                
-                <!-- Fondo Fotográfico de Cielo y Nubes con Overlay Suave -->
-                <div class="absolute inset-0 z-0">
-                    <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1920&auto=format&fit=crop" alt="Cielo y nubes" class="w-full h-full object-cover object-center opacity-65 scale-105">
-                    <div class="absolute inset-0 bg-gradient-to-b from-slate-900/30 via-slate-900/20 to-slate-900/55"></div>
-                </div>
-
-                <!-- Contenido del Hero -->
-                <div class="relative z-10 max-w-3xl mx-auto space-y-6 flex flex-col items-center">
-                    
-                    <!-- Píldora Superior -->
-                    <div class="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-md text-white text-xs font-medium px-4 py-1.5 rounded-full border border-white/30 shadow-sm">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                        <span>AgroMich Cloud v2.1 is Live!</span>
-                    </div>
-
-                    <!-- Título Principal Impactante -->
-                    <h1 class="text-4xl sm:text-6xl md:text-7xl font-semibold tracking-tight text-white leading-tight">
-                        Inteligencia Agrícola. <br>
-                        <span class="font-normal italic font-serif text-emerald-200">Trabajo Más Inteligente.</span>
-                    </h1>
-
-                    <!-- Subtítulo -->
-                    <p class="text-slate-100 text-sm md:text-base font-normal max-w-xl leading-relaxed">
-                        Optimiza auditorías y dictámenes agroambientales. Nuestra plataforma unifica imágenes satelitales, meteorología y datos del SIAP para que tu equipo tome decisiones con precisión.
-                    </p>
-
-                    <!-- Botones de Acción Estilo Referencia -->
-                    <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4 w-full max-w-md">
-                        <button onclick="switchView('docs')" class="w-full sm:w-auto bg-white text-slate-900 font-medium px-7 py-3.5 rounded-full hover:bg-slate-100 transition shadow-lg text-sm">
-                            Explorar Documentación
-                        </button>
-                        <a href="/docs" target="_blank" class="w-full sm:w-auto bg-white/10 backdrop-blur-md text-white border border-white/30 font-medium px-7 py-3.5 rounded-full hover:bg-white/20 transition text-center text-sm shadow-sm">
-                            Ver Swagger UI ↗
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Cards Tecnológicas Originales -->
-            <div class="space-y-6 max-w-6xl mx-auto">
-                <div class="text-center max-w-xl mx-auto space-y-2">
-                    <h2 class="text-2xl font-semibold text-slate-900 tracking-tight">Pilares del Sistema</h2>
-                    <p class="text-slate-500 text-sm">Arquitectura modular orientada al rendimiento y procesamiento descentralizado.</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
-                    <div class="group bg-white p-7 rounded-3xl border border-slate-200/80 hover:border-emerald-500/40 transition shadow-sm hover:shadow-xl relative overflow-hidden">
-                        <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-medium text-lg mb-4 border border-emerald-100">🛰️</div>
-                        <h3 class="font-semibold text-slate-900 text-base mb-2">Google Earth Engine</h3>
-                        <p class="text-slate-500 text-sm leading-relaxed">Series temporales multianuales de vegetación (NDVI) y cobertura forestal con inicialización perezosa y concurrencia.</p>
-                    </div>
-                    <div class="group bg-white p-7 rounded-3xl border border-slate-200/80 hover:border-emerald-500/40 transition shadow-sm hover:shadow-xl relative overflow-hidden">
-                        <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-medium text-lg mb-4 border border-emerald-100">🤖</div>
-                        <h3 class="font-semibold text-slate-900 text-base mb-2">Scraper SIAP Headless</h3>
-                        <p class="text-slate-500 text-sm leading-relaxed">Extracción automatizada de estadísticas oficiales de producción agrícola municipal y modalidades de cultivo en segundo plano.</p>
-                    </div>
-                    <div class="group bg-white p-7 rounded-3xl border border-slate-200/80 hover:border-emerald-500/40 transition shadow-sm hover:shadow-xl relative overflow-hidden">
-                        <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-medium text-lg mb-4 border border-emerald-100">🛡️</div>
-                        <h3 class="font-semibold text-slate-900 text-base mb-2">Seguridad y Tipado</h3>
-                        <p class="text-slate-500 text-sm leading-relaxed">Esquemas estrictos con Pydantic, validación de polígonos GeoJSON y control de acceso mediante el header <code>X-API-Key</code>.</p>
-                    </div>
-                </div>
-            </div>
-        </main>
-
-        <!-- Footer -->
-        <footer class="border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-400 font-normal">
-            AgroMich Platform • Michoacán, México • Cloud Engine & Vercel Ready
-        </footer>
+<body>
+  <header>
+    <div class="wrap">
+      <span class="badge">AgroMich API · v2</span>
+      <h1>Inteligencia agrícola y geoespacial</h1>
+      <p class="lead">Documentación técnica para análisis climático, SIAP, satélite, expedientes ambientales y reportes descargables.</p>
+      <div class="pills"><a href="/docs">Abrir Swagger</a><a href="/openapi.json">OpenAPI JSON</a><a href="#endpoints">Ver endpoints</a><a href="#flujo">Entender el flujo</a></div>
     </div>
+  </header>
+  <div class="wrap layout">
+    <nav aria-label="Navegación de guía">
+      <a href="#inicio">Inicio rápido</a><a href="#arquitectura">Arquitectura</a><a href="#flujo">Flujo de datos</a><a href="#seguridad">Seguridad</a><a href="#endpoints">Endpoints</a><a href="#reportes">Reportes</a><a href="#operacion">Operación</a>
+    </nav>
+    <main>
+      <section id="inicio">
+        <h2>Inicio rápido</h2>
+        <div class="card">
+          <p>La API se ejecuta en <code>http://localhost:8000</code>. La especificación interactiva está en <a href="/docs">/docs</a> y el estado básico en <code>/api/v1/sistema/salud</code>.</p>
+          <pre><button class="copy">Copiar</button>python -m venv venv
+venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+uvicorn app.main:app --reload --port 8000</pre>
+        </div>
+        <div class="notice"><strong>Importante:</strong> las rutas costosas requieren <code>X-API-Key</code> si se definió <code>AGROMICH_API_KEY</code> en el archivo <code>.env</code>.</div>
+      </section>
 
+      <section id="arquitectura">
+        <h2>Arquitectura</h2>
+        <div class="tree">app/
+├── main.py                 # FastAPI y registro de rutas
+├── routers/                # Controladores HTTP
+├── schemas/                # Contratos y validaciones Pydantic
+├── services/               # Lógica agronómica y geoespacial
+├── integrations/           # NASA POWER y Google Earth Engine
+├── repositories/           # Persistencia segura de reportes
+├── core/                   # Configuración, API key y GEE
+└── api/v1/routers/         # Adaptadores de versionado
+reports/
+├── clima_avanzado/         # Salidas climáticas
+├── suelo_y_socioeconomico/ # SIAP
+├── sanidad_y_programas/    # Sanidad y programas
+└── generados/              # Descargas HTML/PDF</div>
+        <div class="grid3">
+          <div class="card"><h3>API y validación</h3><p class="muted">FastAPI recibe JSON, Pydantic valida fechas, rangos, cuerpos y geometrías GeoJSON.</p></div>
+          <div class="card"><h3>Servicios externos</h3><p class="muted">GEE aporta imágenes y métricas; NASA POWER aporta clima; SIAP se consulta con Selenium.</p></div>
+          <div class="card"><h3>Resultados</h3><p class="muted">Los servicios devuelven JSON y pueden persistir respaldos que el módulo de reportes consolida.</p></div>
+        </div>
+      </section>
 
-    <!-- ========================================== -->
-    <!-- VISTA 2: DOCUMENTACIÓN TÉCNICA CON BREADCRUMBS -->
-    <!-- ========================================== -->
-    <div id="docs-view" class="hidden flex h-screen overflow-hidden bg-slate-50">
-        
-        <!-- Sidebar -->
-        <aside class="w-72 bg-slate-900 text-slate-300 hidden md:flex flex-col justify-between border-r border-slate-800">
-            <div class="p-6 overflow-y-auto space-y-6">
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center space-x-2 text-white font-medium text-base">
-                        <span class="text-emerald-400 text-lg">🌱</span>
-                        <span>AgroMich Docs</span>
-                    </div>
-                    <button onclick="switchView('home')" class="text-xs text-slate-400 hover:text-white bg-slate-800 px-2.5 py-1 rounded-lg transition">← Home</button>
-                </div>
-                
-                <nav class="space-y-4 text-sm font-normal">
-                    <div>
-                        <p class="text-xs font-medium text-slate-500 uppercase tracking-wider mb-2">1. Primeros Pasos</p>
-                        <div class="space-y-1 pl-2 border-l border-slate-800">
-                            <a href="#requisitos" class="block py-1 px-2 rounded-lg hover:bg-slate-800 hover:text-white transition">Requisitos Previos</a>
-                            <a href="#instalacion" class="block py-1 px-2 rounded-lg hover:bg-slate-800 hover:text-white transition">Guía de Instalación</a>
-                            <a href="#componentes" class="block py-1 px-2 rounded-lg hover:bg-slate-800 hover:text-white transition">¿Qué estamos instalando?</a>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="text-xs font-medium text-slate-500 uppercase tracking-wider mb-2">2. Estructura</p>
-                        <div class="space-y-1 pl-2 border-l border-slate-800">
-                            <a href="#mapeo-carpetas" class="block py-1 px-2 rounded-lg hover:bg-slate-800 hover:text-white transition">Mapeo de Carpetas</a>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="text-xs font-medium text-slate-500 uppercase tracking-wider mb-2">3. Endpoints</p>
-                        <div class="space-y-1 pl-2 border-l border-slate-800">
-                            <a href="#endpoints-api" class="block py-1 px-2 rounded-lg hover:bg-slate-800 hover:text-white transition">Rutas Principales</a>
-                            <a href="#ejemplos-codigo" class="block py-1 px-2 rounded-lg hover:bg-slate-800 hover:text-white transition">Ejemplo de Consumo</a>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-            <div class="p-6 text-xs text-slate-500 border-t border-slate-800 flex justify-between items-center">
-                <span>Modo Docs</span>
-                <span class="text-emerald-400 font-medium">● v2.1 PRO</span>
-            </div>
-        </aside>
+      <section id="flujo">
+        <h2>Flujo del proyecto</h2>
+        <div class="card">
+          <div class="flow">
+            <div class="node">Cliente<br><small class="muted">web, curl, Swagger</small></div><span class="arrow">→</span>
+            <div class="node">FastAPI + schemas<br><small class="muted">validación y API key</small></div><span class="arrow">→</span>
+            <div class="node">Servicios<br><small class="muted">clima, GEE, SIAP, sanidad</small></div><span class="arrow">→</span>
+            <div class="node">JSON + reports/<br><small class="muted">respuesta y respaldos</small></div>
+          </div>
+          <div class="flow" style="margin-top:12px"><div class="node">reports/ existentes</div><span class="arrow">→</span><div class="node">Servicio de reportes<br><small class="muted">filtro territorial y consolidación</small></div><span class="arrow">→</span><div class="node">Descarga HTML / PDF</div></div>
+        </div>
+      </section>
 
-        <!-- Main Content con Migas de Pan (Breadcrumbs) -->
-        <main class="flex-1 overflow-y-auto p-6 md:p-12 lg:px-16 space-y-14">
-            
-            <!-- Breadcrumbs Globales -->
-            <nav class="flex items-center space-x-2 text-xs text-slate-500 font-medium">
-                <button onclick="switchView('home')" class="hover:text-slate-800 transition flex items-center space-x-1">
-                    <span>🏠 Inicio</span>
-                </button>
-                <span>/</span>
-                <span class="text-slate-800">Documentación Técnica</span>
-            </nav>
+      <section id="seguridad">
+        <h2>Configuración y seguridad</h2>
+        <div class="card">
+          <pre><button class="copy">Copiar</button>AGROMICH_API_KEY=una-clave-larga-y-secreta
+EARTHENGINE_PROJECT=agromich-507422
+GEOVIGIA_ORIGINS=http://localhost:5173,https://tu-dominio.com</pre>
+          <p>Use el encabezado <code>X-API-Key: tu-clave</code> en análisis, expedientes y reportes. Las rutas de salud son públicas. Nunca publique <code>.env</code>, credenciales OAuth ni reportes con datos de productores.</p>
+        </div>
+      </section>
 
-            <!-- Requisitos -->
-            <section id="requisitos" class="space-y-4">
-                <div class="inline-block bg-emerald-50 text-emerald-700 text-xs font-medium px-3 py-1 rounded-full border border-emerald-200">Guía de Configuración</div>
-                <h1 class="text-3xl font-semibold text-slate-900 tracking-tight">1. Requisitos Previos</h1>
-                <p class="text-slate-600 text-base font-normal leading-relaxed">
-                    Antes de desplegar el servidor backend, asegúrate de cumplir con los siguientes requerimientos de entorno:
-                </p>
-                <ul class="list-disc pl-5 space-y-2 text-slate-600 text-sm">
-                    <li><strong>Python 3.10+</strong> instalado en el sistema operativo.</li>
-                    <li><strong>Google Earth Engine API:</strong> Cuenta y autenticación previa mediante credenciales CLI locales.</li>
-                    <li><strong>Google Chrome y ChromeDriver:</strong> Obligatorio para los bots de web scraping del SIAP.</li>
-                </ul>
-            </section>
+      <section id="endpoints">
+        <h2>Endpoints por categoría</h2>
+        <table><thead><tr><th>Método</th><th>Ruta</th><th>Función</th><th>Key</th></tr></thead><tbody>
+          <tr><td><span class="tag get">GET</span></td><td><code>/</code></td><td>Metadatos de la API.</td><td>No</td></tr>
+          <tr><td><span class="tag get">GET</span></td><td><code>/api/v1/sistema/salud</code></td><td>Estado básico sin llamadas externas.</td><td>No</td></tr>
+          <tr><td><span class="tag get">GET</span></td><td><code>/api/v1/sistema/preparacion</code></td><td>Dependencias locales: GEE, Selenium y PDF.</td><td>No</td></tr>
+          <tr><td><span class="tag post">POST</span></td><td><code>/api/v1/clima/analisis</code></td><td>Clima, GDD, balance hídrico y riesgos.</td><td>Sí*</td></tr>
+          <tr><td><span class="tag post">POST</span></td><td><code>/api/v1/suelo/analisis</code></td><td>Extracción SIAP.</td><td>Sí*</td></tr>
+          <tr><td><span class="tag post">POST</span></td><td><code>/api/v1/sanidad/consulta</code></td><td>Alertas fitosanitarias y programas.</td><td>Sí*</td></tr>
+          <tr><td><span class="tag post">POST</span></td><td><code>/api/v1/satelite/analisis</code></td><td>NDVI, EVI, topografía y cobertura.</td><td>Sí*</td></tr>
+          <tr><td><span class="tag post">POST</span></td><td><code>/api/v1/cultivos/clasificar-y-verificar</code></td><td>Clasificación preliminar del cultivo.</td><td>Sí*</td></tr>
+          <tr><td><span class="tag post">POST</span></td><td><code>/api/v1/predios/auditar</code></td><td>Auditoría integral de un predio.</td><td>Sí*</td></tr>
+          <tr><td><span class="tag post">POST</span></td><td><code>/api/v1/expediente/generar-completo</code></td><td>Expediente ambiental.</td><td>Sí*</td></tr>
+          <tr><td><span class="tag post">POST</span></td><td><code>/api/v1/expediente/imagenes-historicas</code></td><td>Imágenes históricas y mosaicos.</td><td>Sí*</td></tr>
+          <tr><td><span class="tag post">POST</span></td><td><code>/api/v1/reportes/generar</code></td><td>Genera y descarga HTML/PDF.</td><td>Sí*</td></tr>
+          <tr><td><span class="tag get">GET</span></td><td><code>/api/v1/reportes</code></td><td>Lista descargas disponibles.</td><td>Sí*</td></tr>
+          <tr><td><span class="tag get">GET</span></td><td><code>/api/v1/reportes/{archivo}/descarga</code></td><td>Descarga un reporte existente.</td><td>Sí*</td></tr>
+        </tbody></table>
+        <p class="muted"><small>* Solo cuando <code>AGROMICH_API_KEY</code> está configurada.</small></p>
 
-            <!-- Instalación -->
-            <section id="instalacion" class="space-y-4">
-                <h2 class="text-2xl font-semibold text-slate-900 border-b border-slate-200 pb-2">2. Guía de Instalación Paso a Paso</h2>
-                <div class="bg-slate-900 text-emerald-400 p-4 rounded-2xl font-mono text-xs overflow-x-auto shadow-inner space-y-2">
-                    <p class="text-slate-400"># 1. Clonar el repositorio y entrar</p>
-                    <p>cd agromich</p>
-                    <p class="text-slate-400 pt-2"># 2. Crear entorno virtual</p>
-                    <p>python -m venv venv</p>
-                    <p>venv\Scripts\activate</p>
-                    <p class="text-slate-400 pt-2"># 3. Instalar librerías</p>
-                    <p>pip install -r requirements.txt</p>
-                    <p class="text-slate-400 pt-2"># 4. Iniciar servidor FastAPI</p>
-                    <p>uvicorn app.main:app --reload --port 8000</p>
-                </div>
-            </section>
+        <article class="card endpoint"><h3>Clima agronómico</h3><p><code>POST /api/v1/clima/analisis</code></p><pre><button class="copy">Copiar</button>curl -X POST http://localhost:8000/api/v1/clima/analisis \
+  -H "Content-Type: application/json" -H "X-API-Key: tu-clave" \
+  -d '{"municipio":"Uruapan","fecha_inicio":"2025-01-01","fecha_fin":"2025-12-31","temp_base_gdd":10}'</pre></article>
 
-            <!-- Componentes -->
-            <section id="componentes" class="space-y-4">
-                <h2 class="text-2xl font-semibold text-slate-900 border-b border-slate-200 pb-2">3. ¿Qué estamos instalando?</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-                        <h4 class="font-semibold text-slate-800 text-sm">FastAPI & Uvicorn</h4>
-                        <p class="text-xs text-slate-500 mt-1">Framework web de alto rendimiento para APIs asíncronas.</p>
-                    </div>
-                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-                        <h4 class="font-semibold text-slate-800 text-sm">Google Earth Engine & Auth</h4>
-                        <p class="text-xs text-slate-500 mt-1">Procesamiento satelital ráster y consulta de series espaciales.</p>
-                    </div>
-                </div>
-            </section>
+        <article class="card endpoint"><h3>Suelo y SIAP</h3><p><code>POST /api/v1/suelo/analisis</code>. Inicia Chrome headless; puede tardar.</p><pre><button class="copy">Copiar</button>curl -X POST http://localhost:8000/api/v1/suelo/analisis \
+  -H "Content-Type: application/json" -H "X-API-Key: tu-clave" \
+  -d '{"estado":"Michoacan de Ocampo","tipo_consulta":"municipio","ciclo":"Ciclicos - Perennes","modalidad":"Riego + Temporal","cultivo":"Resumen cultivos"}'</pre></article>
 
-            <!-- Mapeo de Carpetas -->
-            <section id="mapeo-carpetas" class="space-y-4">
-                <h2 class="text-2xl font-semibold text-slate-900 border-b border-slate-200 pb-2">4. Mapeo del Proyecto</h2>
-                <div class="bg-slate-900 text-slate-300 p-6 rounded-2xl font-mono text-xs overflow-x-auto shadow-inner space-y-1.5 leading-relaxed">
-                    <p class="text-emerald-400 font-semibold">agromich/</p>
-                    <p class="pl-4">├── <span class="text-white">app/</span> <span class="text-slate-500"># Núcleo modular FastAPI</span></p>
-                    <p class="pl-8">│   ├── <span class="text-emerald-300">main.py</span> <span class="text-slate-500"># Aplicación central</span></p>
-                    <p class="pl-8">│   ├── <span class="text-white">api/v1/routers/</span> <span class="text-slate-500"># Endpoints versionados</span></p>
-                    <p class="pl-8">│   ├── <span class="text-white">core/</span> <span class="text-slate-500"># Config, GEE client y seguridad</span></p>
-                    <p class="pl-8">│   ├── <span class="text-white">integrations/</span> <span class="text-slate-500"># Conexiones NASA y GEE</span></p>
-                    <p class="pl-8">│   ├── <span class="text-white">repositories/</span> <span class="text-slate-500"># Persistencia segura de reportes</span></p>
-                    <p class="pl-8">│   ├── <span class="text-white">schemas/</span> <span class="text-slate-500"># Modelos Pydantic tipados</span></p>
-                    <p class="pl-8">│   └── <span class="text-white">services/</span> <span class="text-slate-500"># Lógica agroespacial y SIAP</span></p>
-                    <p class="pl-4">├── <span class="text-white">public/</span> <span class="text-slate-500"># Frontend estático</span></p>
-                    <p class="pl-4">├── <span class="text-white">reports/</span> <span class="text-slate-500"># Salidas JSON y CSV</span></p>
-                    <p class="pl-4">└── <span class="text-emerald-300">requirements.txt</span> <span class="text-slate-500"># Dependencias</span></p>
-                </div>
-            </section>
+        <article class="card endpoint"><h3>Sanidad y programas</h3><p><code>POST /api/v1/sanidad/consulta</code></p><pre><button class="copy">Copiar</button>curl -X POST http://localhost:8000/api/v1/sanidad/consulta \
+  -H "Content-Type: application/json" -H "X-API-Key: tu-clave" \
+  -d '{"estado":"Michoacan de Ocampo","municipio":"Uruapan","cultivo":"Aguacate"}'</pre></article>
 
-            <!-- Endpoints -->
-            <section id="endpoints-api" class="space-y-4">
-                <h2 class="text-2xl font-semibold text-slate-900 border-b border-slate-200 pb-2">5. Endpoints Principales</h2>
-                <div class="space-y-3 font-mono text-xs">
-                    <div class="bg-slate-900 text-slate-200 p-3.5 rounded-xl flex items-center justify-between">
-                        <div><span class="text-emerald-400 font-medium">POST</span> /api/v1/expediente/generar-completo</div>
-                        <span class="bg-slate-800 text-slate-300 px-2 py-0.5 rounded text-[10px]">Maestro</span>
-                    </div>
-                </div>
-            </section>
+        <article class="card endpoint"><h3>Análisis satelital</h3><p><code>POST /api/v1/satelite/analisis</code>. Las coordenadas GeoJSON siempre son <code>[longitud, latitud]</code>.</p><pre><button class="copy">Copiar</button>curl -X POST http://localhost:8000/api/v1/satelite/analisis \
+  -H "Content-Type: application/json" -H "X-API-Key: tu-clave" \
+  -d '{"geometry":{"type":"Polygon","coordinates":[[[-102.065,19.412],[-102.055,19.412],[-102.055,19.422],[-102.065,19.422],[-102.065,19.412]]]},"cultivo":"aguacate","fecha_inicio":"2020-01-01","fecha_fin":"2025-12-31"}'</pre></article>
 
-            <!-- Ejemplos -->
-            <section id="ejemplos-codigo" class="space-y-4 pb-16">
-                <h2 class="text-2xl font-semibold text-slate-900 border-b border-slate-200 pb-2">6. Ejemplo de Consumo</h2>
-                <pre class="bg-slate-900 text-emerald-400 p-5 rounded-2xl text-xs font-mono overflow-x-auto shadow-inner"><code>import requests
+        <article class="card endpoint"><h3>Clasificación de cultivo</h3><p><code>POST /api/v1/cultivos/clasificar-y-verificar</code></p><pre><button class="copy">Copiar</button>curl -X POST http://localhost:8000/api/v1/cultivos/clasificar-y-verificar \
+  -H "Content-Type: application/json" -H "X-API-Key: tu-clave" \
+  -d '{"geometry":{"type":"Polygon","coordinates":[[[-102.065,19.412],[-102.055,19.412],[-102.055,19.422],[-102.065,19.422],[-102.065,19.412]]]},"cultivo":"aguacate","anio":2025}'</pre></article>
 
-url = "http://localhost:8000/api/v1/expediente/generar-completo"
-payload = {
-    "nombre_huerto": "Huerta San José",
-    "productor": "Juan Pérez",
-    "municipio": "Uruapan",
-    "cultivo": "aguacate",
-    "geometry": {
-        "type": "Polygon",
-        "coordinates": [[[-102.1, 19.4], [-102.0, 19.4], [-102.0, 19.5], [-102.1, 19.5], [-102.1, 19.4]]]
-    },
-    "anio_inicio": 2022,
-    "anio_fin": 2026
-}
-response = requests.post(url, json=payload)
-print(response.json())</code></pre>
-            </section>
+        <article class="card endpoint"><h3>Auditoría de predio</h3><p><code>POST /api/v1/predios/auditar</code></p><pre><button class="copy">Copiar</button>curl -X POST http://localhost:8000/api/v1/predios/auditar \
+  -H "Content-Type: application/json" -H "X-API-Key: tu-clave" \
+  -d '{"nombre_huerto":"Huerta San Jose","productor":"Productor Ejemplo","cultivo":"aguacate","municipio":"Uruapan","geojson":{"type":"Polygon","coordinates":[[[-102.065,19.412],[-102.055,19.412],[-102.055,19.422],[-102.065,19.422],[-102.065,19.412]]]}}'</pre></article>
 
-        </main>
-    </div>
+        <article class="card endpoint"><h3>Expediente ambiental e imágenes</h3><p><code>POST /api/v1/expediente/generar-completo</code> genera la auditoría ambiental. <code>POST /api/v1/expediente/imagenes-historicas</code> recibe <code>geometry</code>, <code>anios</code>, <code>cultivo</code>, <code>mes_inicio</code> y <code>mes_fin</code>.</p><pre><button class="copy">Copiar</button>curl -X POST http://localhost:8000/api/v1/expediente/generar-completo \
+  -H "Content-Type: application/json" -H "X-API-Key: tu-clave" \
+  -d '{"nombre_huerto":"Huerta San Jose","productor":"Productor Ejemplo","municipio":"Uruapan","cultivo":"aguacate","geometry":{"type":"Polygon","coordinates":[[[-102.065,19.412],[-102.055,19.412],[-102.055,19.422],[-102.065,19.422],[-102.065,19.412]]]},"anio_inicio":2018,"anio_fin":2025}'</pre></article>
+      </section>
 
+      <section id="reportes">
+        <h2>Reportes y descargas</h2>
+        <div class="card">
+          <p>El servicio de reportes consolida las fuentes disponibles: <code>clima</code>, <code>suelo</code>, <code>sanidad</code> y <code>procesados</code>. El archivo se devuelve en la respuesta y se guarda en <code>reports/generados/</code>.</p>
+          <pre><button class="copy">Copiar</button>curl -X POST http://localhost:8000/api/v1/reportes/generar \
+  -H "Content-Type: application/json" -H "X-API-Key: tu-clave" \
+  -d '{"titulo":"Reporte integral Uruapan","estado":"Michoacan de Ocampo","municipio":"Uruapan","servicios":["clima","suelo","sanidad"],"incluir_historial":false,"formato":"pdf"}' \
+  --output reporte-uruapan.pdf</pre>
+          <pre><button class="copy">Copiar</button># Listar archivos y descargar uno
+curl -H "X-API-Key: tu-clave" http://localhost:8000/api/v1/reportes
+curl -H "X-API-Key: tu-clave" \
+  "http://localhost:8000/api/v1/reportes/NOMBRE_DEL_ARCHIVO.pdf/descarga" \
+  --output reporte.pdf</pre>
+        </div>
+      </section>
+
+      <section id="operacion">
+        <h2>Operación, errores y límites</h2>
+        <div class="grid">
+          <div class="card"><h3>Estados HTTP</h3><p><code>200</code> éxito · <code>401/403</code> API key · <code>422</code> JSON, fecha o GeoJSON inválido · <code>502</code> proveedor externo · <code>503</code> dependencia no disponible.</p></div>
+          <div class="card"><h3>Buenas prácticas</h3><p>No incluya secretos en clientes web. Limite el tamaño de los polígonos. Muestre carga para SIAP/GEE. Trate las señales satelitales como insumos de revisión, no como una resolución legal.</p></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer>AgroMich API · Documentación estática. Para el contrato vivo, use <a href="/docs">Swagger/OpenAPI</a>.</footer>
+  <script>
+    document.querySelectorAll('button.copy').forEach(button => {
+      button.addEventListener('click', async () => {
+        const text = button.parentElement.textContent.replace('Copiar', '').trim();
+        try { await navigator.clipboard.writeText(text); button.textContent = 'Copiado'; setTimeout(() => button.textContent = 'Copiar', 1400); }
+        catch { button.textContent = 'Selecciona el texto'; }
+      });
+    });
+  </script>
 </body>
 </html>

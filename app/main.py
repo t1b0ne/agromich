@@ -1,10 +1,12 @@
 import sys
 import os
+from pathlib import Path
 
 # Asegurar que la raíz del proyecto esté en el path de Python para importar los servicios
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from fastapi import FastAPI
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 
 # Importar los routers modulares (¡Añadimos predios aquí!)
@@ -40,6 +42,13 @@ app.include_router(predios.router)
 app.include_router(cultivos.router)
 app.include_router(reportes.router)
 app.include_router(sistema.router)
+
+
+@app.get("/guia", include_in_schema=False)
+def guia_documentacion():
+    """Sirve la guía estática del proyecto sin depender de un frontend externo."""
+    guia = Path(__file__).resolve().parent.parent / "public" / "index.html"
+    return FileResponse(guia, media_type="text/html")
 app.include_router(expediente.router)  # Añadido el router de expediente
 
 @app.get("/", tags=["Salud del Sistema"])
